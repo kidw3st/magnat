@@ -955,11 +955,12 @@ ul, ol {
 }
 
 .cities__cta {
-  grid-column: 1 / -1;
+  grid-column: 2 / -1;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  justify-content: center;
 }
 
 .cities__cta a {
