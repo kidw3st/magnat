@@ -592,7 +592,117 @@ section[id] { scroll-margin-top: 86px; }
 
 /* ---------- секции ---------- */
 
-.section { padding-block: 64px; }
+.section {
+  position: relative;
+  padding-block: 64px;
+}
+
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* чертёжный мир тянется через светлые секции ватермаркой */
+@media (min-width: 1024px) {
+  .section:not(.section--dark)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: url("picsandvideo/district-plan.svg") right -220px top -140px / 1500px auto no-repeat;
+    opacity: 0.09;
+  }
+
+  .section.section--tinted:not(.section--dark)::before {
+    background-position: left -260px bottom -180px;
+    opacity: 0.1;
+  }
+}
+
+:root[data-theme="night"] .section:not(.section--dark)::before { opacity: 0.28; }
+
+/* ---------- магистраль: дорога от hero к билборду ---------- */
+
+main { position: relative; }
+
+.route { display: none; }
+
+@media (min-width: 1300px) {
+  .route {
+    --route-c: rgba(110, 120, 155, 0.55);
+    display: block;
+    position: absolute;
+    top: 40px;
+    bottom: 150px;
+    right: max(28px, calc((100vw - 1200px) / 2 - 48px));
+    width: 22px;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--route-c), var(--route-c)) left center / 1.5px 100% no-repeat,
+      linear-gradient(var(--route-c), var(--route-c)) right center / 1.5px 100% no-repeat,
+      repeating-linear-gradient(180deg, var(--route-c) 0 14px, transparent 14px 30px) center top / 1.5px 100% no-repeat;
+  }
+
+  /* стрелка: дорога упирается в билборд */
+  .route::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -22px;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top: 12px solid rgba(110, 120, 155, 0.75);
+  }
+}
+
+/* ---------- билборд с формой ---------- */
+
+.billboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.billboard__panel {
+  width: 100%;
+  max-width: 780px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-2);
+  text-align: left;
+}
+
+.billboard__legs {
+  position: relative;
+  width: min(780px, 100%);
+  height: 58px;
+  border-bottom: 1px solid var(--navy-line);
+}
+
+.billboard__legs::before,
+.billboard__legs::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: var(--navy-line);
+}
+
+.billboard__legs::before { left: 22%; }
+.billboard__legs::after { right: 22%; }
+
+/* внутри светлого щита форма живёт в «дневных» цветах */
+.billboard .lead-form--wide { max-width: none; margin: 0; padding: 0; }
+.billboard .lead-form--wide .field label { color: var(--ink-2); }
+.billboard .consent--dark { color: var(--ink-2); }
+.billboard .consent--dark input { accent-color: var(--amber); }
+.billboard .field__error { color: var(--error); }
+.billboard .form-status.is-success { color: var(--success); }
+.billboard .form-status.is-error { color: var(--error); }
 
 .section--tinted { background: var(--paper-2); }
 
@@ -875,48 +985,54 @@ section[id] { scroll-margin-top: 86px; }
   color: var(--amber-ink);
 }
 
-/* ---------- медиа в шагах сделки ---------- */
+/* ---------- бесконечная карусель фото в шагах сделки ---------- */
 
-.steps__media {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.marquee {
   margin-top: 48px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
 
-.steps__media figure { margin: 0; }
-
-.steps__media img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 30%;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--navy-line);
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
 }
 
-.steps__media-video { grid-column: 1 / -1; }
-
-.steps__media video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--navy-line);
-  background: var(--navy-950);
+.marquee__group {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px;
 }
 
-.steps__media figcaption {
-  margin-top: 8px;
-  font-size: var(--fs-small);
-  color: var(--on-navy-2);
+@keyframes marquee-scroll {
+  to { transform: translateX(-50%); }
 }
 
-/* заглушка под фото/видео */
+/* пауза при наведении и в режиме скриншота */
+@media (hover: hover) and (pointer: fine) {
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+}
+:root[data-shot] .marquee__track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+  .marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* заглушка под фото */
 .media-slot {
   display: grid;
   place-content: center;
   justify-items: center;
   gap: 10px;
+  flex: none;
+  width: 224px;
   aspect-ratio: 4 / 5;
   border: 1.5px dashed var(--navy-line);
   border-radius: var(--radius-lg);
@@ -924,7 +1040,19 @@ section[id] { scroll-margin-top: 86px; }
   font-size: var(--fs-small);
 }
 
-.media-slot.steps__media-video { aspect-ratio: 16 / 9; }
+/* реальные фото, когда приедут */
+.marquee__img {
+  flex: none;
+  width: 224px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--navy-line);
+}
+
+@media (min-width: 1024px) {
+  .media-slot, .marquee__img { width: 264px; }
+}
 
 
 /* ---------- города ---------- */
