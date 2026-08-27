@@ -18,13 +18,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="styles.css?v=18">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
     try {
-      var mTheme = new URLSearchParams(location.search).get('theme') || localStorage.getItem('magnat-theme');
+      var mParams = new URLSearchParams(location.search);
+      var mTheme = mParams.get('theme') || localStorage.getItem('magnat-theme');
       if (mTheme === 'night') document.documentElement.dataset.theme = 'night';
+      if (mParams.get('shot')) document.documentElement.dataset.shot = '1'; // служебный режим для скриншотов
     } catch (e) {}
   </script>
 
@@ -377,23 +379,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         </li>
       </ol>
 
+      <!-- TODO: заглушки под медиа. Когда придут фото/видео от заказчика:
+           первые два слота заменить на <figure><img … aspect 4:5></figure>,
+           широкий — на <figure class="steps__media-video"><video poster=…></figure> -->
       <div class="steps__media" data-reveal-group>
-        <figure>
-          <img src="picsandvideo/deal-1.jpg" alt="Встреча с клиентом при завершении сделки" loading="lazy" width="720" height="640">
-          <!-- TODO: при желании уточните подписи к фото (город, тип сделки) -->
-          <figcaption>Из архива сделок компании</figcaption>
-        </figure>
-        <figure>
-          <img src="picsandvideo/deal-2.jpg" alt="Подписание документов с клиентом" loading="lazy" width="720" height="474">
-          <figcaption>Из архива сделок компании</figcaption>
-        </figure>
-        <figure class="steps__media-video">
-          <video controls preload="none" playsinline poster="picsandvideo/poster-vyezd.jpg" width="1280" height="720">
-            <source src="picsandvideo/DJI_20250514141716_0074_D.MP4" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-          </video>
-          <figcaption>Видео: наша команда на объекте</figcaption>
-        </figure>
+        <div class="media-slot" role="img" aria-label="Место для фото со сделки">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="6" width="24" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="m8 24 6.5-6 4.5 4 4-3.5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Фото скоро появится</span>
+        </div>
+        <div class="media-slot" role="img" aria-label="Место для фото со сделки">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="6" width="24" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="13" r="2.4" stroke="currentColor" stroke-width="1.6"/><path d="m8 24 6.5-6 4.5 4 4-3.5 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Фото скоро появится</span>
+        </div>
+        <div class="media-slot steps__media-video" role="img" aria-label="Место для видео с объекта">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="7" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M14 12.5v7l6-3.5-6-3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <span>Видео скоро появится</span>
+        </div>
       </div>
     </div>
   </section>

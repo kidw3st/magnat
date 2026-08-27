@@ -911,6 +911,21 @@ section[id] { scroll-margin-top: 86px; }
   color: var(--on-navy-2);
 }
 
+/* заглушка под фото/видео */
+.media-slot {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  aspect-ratio: 4 / 5;
+  border: 1.5px dashed var(--navy-line);
+  border-radius: var(--radius-lg);
+  color: var(--on-navy-2);
+  font-size: var(--fs-small);
+}
+
+.media-slot.steps__media-video { aspect-ratio: 16 / 9; }
+
 
 /* ---------- города ---------- */
 
@@ -1265,6 +1280,15 @@ section[id] { scroll-margin-top: 86px; }
 .mobilebar.is-hidden { transform: translateY(110%); }
 
 /* ---------- появление секций ---------- */
+
+/* служебный режим ?shot=1: статичный рендер для полностраничных скриншотов */
+:root[data-shot] .hero { min-height: 0 !important; }
+:root[data-shot] [data-reveal],
+:root[data-shot] [data-reveal-group] > * {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
 
 /* скрываем до появления только при работающем JS (класс .js ставит script.js) */
 .js [data-reveal],
