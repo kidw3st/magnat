@@ -189,6 +189,42 @@
     });
   });
 
+  /* ---------- дневной / ночной режим ---------- */
+
+  var themeToggle = document.querySelector('[data-theme-toggle]');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var night = document.documentElement.dataset.theme === 'night';
+      if (night) {
+        delete document.documentElement.dataset.theme;
+      } else {
+        document.documentElement.dataset.theme = 'night';
+      }
+      try { localStorage.setItem('magnat-theme', night ? 'day' : 'night'); } catch (e) {}
+    });
+  }
+
+  /* ---------- кнопка «наверх» ---------- */
+
+  var toTop = document.querySelector('[data-to-top]');
+  if (toTop) {
+    var toTopTick = false;
+    var updateToTop = function () {
+      toTop.classList.toggle('is-visible', window.scrollY > 700);
+      toTopTick = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!toTopTick) {
+        toTopTick = true;
+        requestAnimationFrame(updateToTop);
+      }
+    }, { passive: true });
+    updateToTop();
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
   /* ---------- скроллспай: подсветка активного раздела в шапке ---------- */
 
   var navLinks = document.querySelectorAll('.header__nav a[href^="#"]');
