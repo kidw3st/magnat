@@ -351,6 +351,7 @@ ul, ol {
 
 /* к якорям не подъезжаем под липкую шапку */
 section[id] { scroll-margin-top: 86px; }
+#lead-form { scroll-margin-top: 92px; }
 
 /* навигация включается там, где ей просторно */
 @media (min-width: 1160px) {

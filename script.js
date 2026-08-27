@@ -355,14 +355,24 @@
     barObserver.observe(finalCta);
   }
 
-  /* ---------- плавный скролл к форме с фокусом на телефоне ---------- */
+  /* ---------- переход к форме: на десктопе — к началу hero целиком,
+     на мобильном — к самой форме; без обрубленного первого экрана ---------- */
 
   document.querySelectorAll('a[href="#lead-form"]').forEach(function (link) {
-    link.addEventListener('click', function () {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var behavior = reduceMotion ? 'auto' : 'smooth';
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        window.scrollTo({ top: 0, behavior: behavior });
+      } else {
+        var target = document.getElementById('lead-form');
+        if (target) target.scrollIntoView({ behavior: behavior, block: 'start' });
+      }
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
       setTimeout(function () {
         var phoneInput = document.getElementById('lf-phone');
         if (phoneInput) phoneInput.focus({ preventScroll: true });
-      }, reduceMotion ? 0 : 450);
+      }, reduceMotion ? 0 : 600);
     });
   });
 
