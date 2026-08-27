@@ -271,9 +271,9 @@ ul, ol {
   pointer-events: none;
   display: none;
   opacity: 0.62;
-  -webkit-mask-image: linear-gradient(100deg, transparent 16%, #000 50%);
-  mask-image: linear-gradient(100deg, transparent 16%, #000 50%);
-  background: url("picsandvideo/district-plan.svg") right -40px bottom -140px / 1460px auto no-repeat;
+  -webkit-mask-image: linear-gradient(100deg, transparent 12%, #000 46%);
+  mask-image: linear-gradient(100deg, transparent 12%, #000 46%);
+  background: url("picsandvideo/district-plan.svg") right -60px bottom -170px / 1620px auto no-repeat;
 }
 
 @media (min-width: 1024px) {
