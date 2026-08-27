@@ -56,15 +56,14 @@
     });
   });
 
-  /* ---------- город из шапки подставляется в поля адреса ---------- */
+  /* ---------- город из шапки подставляется в заявку и подсвечивает плитку ---------- */
 
   var citySelect = document.getElementById('city-select');
   if (citySelect) {
     citySelect.addEventListener('change', function () {
       if (!citySelect.value) return;
-      document.querySelectorAll('input[name="address"]').forEach(function (input) {
-        if (!input.value.trim()) input.value = citySelect.value + ', ';
-      });
+      applyCity(citySelect.value);
+      syncCityTiles(citySelect.value);
     });
   }
 
@@ -161,17 +160,24 @@
   }
 
   var cityPicks = document.querySelectorAll('.cities__pick');
+
+  /* подсветка плитки, соответствующей выбранному городу (для Перми плитки нет) */
+  function syncCityTiles(city) {
+    cityPicks.forEach(function (b) {
+      var active = b.dataset.city === city;
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      b.querySelector('.cities__go').hidden = !active;
+    });
+  }
+
   cityPicks.forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       if (e.target.closest('a')) return; // клик по ссылке «к форме» работает как ссылка
       var pressed = btn.getAttribute('aria-pressed') === 'true';
-      cityPicks.forEach(function (b) {
-        b.setAttribute('aria-pressed', 'false');
-        b.querySelector('.cities__go').hidden = true;
-      });
-      if (!pressed) {
-        btn.setAttribute('aria-pressed', 'true');
-        btn.querySelector('.cities__go').hidden = false;
+      if (pressed) {
+        syncCityTiles(null);
+      } else {
+        syncCityTiles(btn.dataset.city);
         applyCity(btn.dataset.city);
       }
     });
