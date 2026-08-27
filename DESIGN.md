@@ -31,7 +31,7 @@ typography:
     letterSpacing: "-0.025em"
   headline:
     fontFamily: "Golos Text, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(1.5rem, 1.15rem + 1.5vw, 2.125rem)"
+    fontSize: "clamp(1.625rem, 1.2rem + 1.9vw, 2.5rem)"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "-0.02em"

@@ -26,7 +26,7 @@
 
   /* типографика: 4 размера через clamp + базовый */
   --fs-1: clamp(1.875rem, 1.1rem + 3.4vw, 3.25rem);   /* h1 */
-  --fs-2: clamp(1.5rem, 1.15rem + 1.5vw, 2.125rem);   /* h2 */
+  --fs-2: clamp(1.625rem, 1.2rem + 1.9vw, 2.5rem);    /* h2 */
   --fs-3: clamp(1.0625rem, 1rem + 0.35vw, 1.1875rem); /* h3 / лид */
   --fs-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
   --fs-0: 1rem;
