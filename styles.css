@@ -968,8 +968,10 @@ ul, ol {
 .cities__cta a {
   color: var(--amber);
   font-weight: 500;
+  white-space: nowrap;
   text-decoration-color: var(--navy-line);
   text-underline-offset: 3px;
+  margin-top: 4px;
 }
 @media (hover: hover) and (pointer: fine) {
   .cities__cta a:hover { text-decoration-color: var(--amber); }
@@ -1160,6 +1162,7 @@ ul, ol {
     align-items: baseline;
     gap: 12px;
   }
+  .cities__cta a { margin-top: 0; }
 
   .reviews {
     grid-template-columns: 260px 1fr;
@@ -1248,7 +1251,13 @@ ul, ol {
   .steps__media-video { grid-column: auto; }
 
   .cities { grid-template-columns: repeat(4, 1fr); }
-  .cities__cta { grid-column: auto; }
+  .cities__cta {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .cities__cta a { margin-top: 4px; }
 
   .section { padding-block: 96px; }
 
