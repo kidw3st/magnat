@@ -261,6 +261,17 @@
     });
   }
 
+  /* ---------- бесшовный цикл лент отзывов: дублируем группу ---------- */
+
+  document.querySelectorAll('.rev-track').forEach(function (track) {
+    var group = track.querySelector('.rev-group');
+    if (group) {
+      var copy = group.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      track.appendChild(copy);
+    }
+  });
+
   /* ---------- появление секций: opacity + translateY(16px), 400ms ---------- */
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

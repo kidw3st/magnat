@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=23">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -42,6 +42,17 @@
     "telephone": "+79194809290",
     "email": "atv-559@mail.ru",
     "taxID": "5902062050",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Пермь",
+      "streetAddress": "ул. Сибирская, 47а, офис 207"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "ratingCount": "39",
+      "bestRating": "5"
+    },
     "areaServed": ["Пермь","Москва","Санкт-Петербург","Новосибирск","Екатеринбург","Казань","Красноярск","Нижний Новгород","Челябинск","Уфа","Краснодар","Самара","Омск","Тюмень","Ижевск","Воронеж"],
     "description": "Срочный выкуп квартир до 80% от рыночной стоимости. Деньги в день обращения, оформление через МФЦ и Росреестр."
   }
@@ -156,7 +167,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <div class="hero__copy">
         <h1>Выкупим вашу квартиру&nbsp;до&nbsp;80% от&nbsp;рыночной стоимости</h1>
         <p class="hero__sub">Деньги в день обращения. Официальное оформление через МФЦ и&nbsp;Росреестр. Все расходы по сделке берём на себя.</p>
-        <p class="hero__req">Работаем официально: ООО «МАГНАТ 59», ИНН 5902062050</p>
+        <p class="hero__req">Работаем официально: ООО&nbsp;«МАГНАТ&nbsp;59», ИНН&nbsp;5902062050</p>
       </div>
 
       <div class="hero__form">
@@ -202,9 +213,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </div>
 
       <figure class="hero__owner">
-        <img src="picsandvideo/owner-portrait.jpg" alt="Основатель компании МАГНАТ" width="853" height="742" loading="lazy">
-        <!-- TODO: добавьте имя основателя перед словом «основатель», например: «Иван Иванов, основатель компании» -->
-        <figcaption>Основатель компании «МАГНАТ»</figcaption>
+        <img src="picsandvideo/owner-portrait.jpg" alt="Иван Соколов, основатель компании МАГНАТ" width="853" height="742" loading="lazy">
+        <figcaption>Иван Соколов, основатель компании</figcaption>
       </figure>
 
       <dl class="facts">
@@ -443,35 +453,48 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <!-- ============ ОТЗЫВЫ ============ -->
   <section class="section section--tinted" id="reviews" aria-label="Отзывы клиентов">
     <div class="container">
-      <h2 class="section__title" data-reveal>Отзывы наших клиентов</h2>
-      <div class="reviews" data-reveal-group>
-        <figure class="reviews__video">
-          <video controls preload="none" playsinline poster="picsandvideo/poster-review.jpg" width="720" height="1280">
-            <source src="picsandvideo/IMG_1972.MOV">
-            Ваш браузер не поддерживает видео.
-          </video>
-          <!-- TODO: уточните подпись: кто клиент и какая сделка -->
-          <figcaption>Видеоотзыв клиента</figcaption>
-        </figure>
-        <div class="reviews__list">
-          <figure class="reviews__quote">
-            <blockquote>
-              <p>{{REVIEW_1_TEXT}}</p>
-            </blockquote>
-            <figcaption>{{REVIEW_1_NAME}}, {{REVIEW_1_CITY}}</figcaption>
-          </figure>
-          <figure class="reviews__quote">
-            <blockquote>
-              <p>{{REVIEW_2_TEXT}}</p>
-            </blockquote>
-            <figcaption>{{REVIEW_2_NAME}}, {{REVIEW_2_CITY}}</figcaption>
-          </figure>
-          <figure class="reviews__quote">
-            <blockquote>
-              <p>{{REVIEW_3_TEXT}}</p>
-            </blockquote>
-            <figcaption>{{REVIEW_3_NAME}}, {{REVIEW_3_CITY}}</figcaption>
-          </figure>
+      <div class="rev-head" data-reveal>
+        <h2 class="section__title">Отзывы наших клиентов</h2>
+        <div class="rev-rating">
+          <b>5,0</b>
+          <span class="rev-stars" aria-label="Рейтинг 5 из 5">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4l-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4l-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4l-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4l-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4l-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>
+          </span>
+          <a href="https://2gis.ru/perm/firm/70000001044840694/tab/reviews" target="_blank" rel="noopener">39 оценок на 2ГИС</a>
+        </div>
+      </div>
+
+      <div class="rev-marquee" data-reveal>
+        <div class="rev-track">
+          <div class="rev-group">
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Хочу поблагодарить Соколова Ивана Александровича! Настоящий профессионал своего дела, выполнил свою работу быстро, чётко и, самое важное, объяснял каждый шаг. Вы сэкономили моё время и главное нервы!</p><footer>Olga Rogonova · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Благодарю за сделку. Все прошло как по маслу. Быстро и качественно. Рекомендую.</p><footer>Владимир Герасимов · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Сделка была межрегиональная. Иван подобрал нужную мне квартиру, сопроводил полностью сделку. Быстро и профессионально решал все вопросы.</p><footer>Наталья Азанова · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Выражаем благодарность за оперативность в продаже квартиры и профессиональный подход в проведении сделки!</p><footer>Aleani · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Одно из лучших агентств Перми. Приветливые риэлторы, готовы договариваться по любым вопросам. Рекомендую.</p><footer>Олег Медведев · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Очень быстро продалась квартира, и самое главное — на оформление сделки потратили всего 20 минут. А подготовку документов сделали удалённо, что очень радует.</p><footer>Любовь Брулетова · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Работал с Иваном, все сделки прошли быстро и без проблем. Рекомендую обращаться.</p><footer>Максим Мухаметханов · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Срочно надо было продать квартиру — уезжали в другой город. Отдали ребятам все полномочия и, как итог, пришли только один раз, уже на подписание договора. Спасибо, что сэкономили нам время!</p><footer>Леонид Маишев · 2ГИС</footer></article>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-marquee" data-reveal>
+        <div class="rev-track rev-track--reverse">
+          <div class="rev-group">
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Огромное спасибо за помощь в продаже квартиры Ивану Соколову. Квартира продалась очень быстро! Грамотный специалист, замечательный и порядочный человек.</p><footer>Любовь Полыгалова · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Благодаря чёткой и слаженной работе специалистов агентства получилось закрыть сделку по продаже квартиры в Перми и приобретению нового жилья в Санкт-Петербурге в короткие сроки на выгодных условиях.</p><footer>Артем Косов · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Иван оперативно организовал и провёл сделку. Без лишних встреч и звонков. Всё объяснял детально и терпеливо по всем интересующим нас вопросам.</p><footer>Анна К · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Ивану можно доверять, он грамотный, знающий специалист. Я чувствовала себя защищённой. Спокойствие, уверенность, грамотный подход, без суеты — то, что нужно!</p><footer>Татьяна Симонова · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Магнат59 делает свою работу на 200%. Помогли нам и с продажей квартиры в Перми, и с оформлением всех документов, а также подобрали идеальный вариант в Крыму. Оценка 5/5.</p><footer>Светлана Паничева · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Покупателя привёл на второй день после подписания договора о сотрудничестве. Сделка прошла удачно, без каких-либо загвоздочек. Всё было грамотно и компетентно.</p><footer>Ольга Лыткина · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Иван очень быстро нашёл покупателя, всегда держал нас в курсе происходящего и грамотно сопроводил сделку. Очень рекомендуем!</p><footer>Нина Сухарева · 2ГИС</footer></article>
+            <article class="rev-card"><span class="rev-card__stars" aria-hidden="true">★★★★★</span><p>Работа профессиональная, быстрая, учитываются все интересы клиента. Вежливое, доброжелательное и внимательное отношение. Агентству доверяю и буду рад сотрудничать в будущем.</p><footer>Петр Алигрин · 2ГИС</footer></article>
+          </div>
         </div>
       </div>
     </div>
@@ -490,7 +513,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <span class="hq__badge">Ваш город</span>
           </span>
           <b class="hq__city">Пермь</b>
-          <span class="hq__region">Пермский край · ООО «МАГНАТ 59»</span>
+          <span class="hq__region">ул. Сибирская, 47а, офис 207 · ООО «МАГНАТ 59»</span>
         </div>
         <div class="hq__contacts">
           <a class="hq__phone" href="tel:+79194809290">8 (919) 480-92-90</a>
@@ -626,7 +649,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <h3>Контакты</h3>
         <p>
           <a href="tel:+79194809290">8 (919) 480-92-90</a><br>
-          <a href="mailto:atv-559@mail.ru">atv-559@mail.ru</a>
+          <a href="mailto:atv-559@mail.ru">atv-559@mail.ru</a><br>
+          Пермь, ул. Сибирская, 47а, офис 207
         </p>
         <p><a href="privacy.html">Политика конфиденциальности</a></p>
       </div>
@@ -649,6 +673,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a class="btn btn--accent" href="#lead-form">Оценить квартиру</a>
 </nav>
 
-<script src="script.js?v=17" defer></script>
+<script src="script.js?v=23" defer></script>
 </body>
 </html>

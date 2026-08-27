@@ -733,16 +733,25 @@ section[id] { scroll-margin-top: 86px; }
 .section--cta { text-align: center; overflow: hidden; }
 .section--cta .section__title { margin-bottom: 16px; }
 
-/* схематичная инфраструктура вокруг билборда */
+/* уличная сцена в фас вокруг билборда: фасады, фонари, скамейки, бордюр */
 .section--cta::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: url("picsandvideo/district-plan.svg") center bottom -300px / 1750px auto no-repeat;
-  opacity: 0.42;
-  -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 48%);
-  mask-image: linear-gradient(180deg, transparent 6%, #000 48%);
+  display: none;
+  background: url("picsandvideo/street-scene.svg") center bottom 20px / 1800px auto no-repeat;
+  opacity: 0.75;
+}
+
+@media (min-width: 640px) {
+  .section--cta::before { display: block; }
+  /* земля щита — это бордюр сцены */
+  .billboard__support { border-bottom-color: transparent; }
+}
+
+@media (min-width: 1024px) {
+  .section--cta::before { background-position: center bottom 36px; }
 }
 
 /* ---------- преимущества: сетка на волосяных линиях ---------- */
@@ -934,68 +943,129 @@ section[id] { scroll-margin-top: 86px; }
 
 .compare__col--accent li::before { background: var(--amber); opacity: 1; }
 
-/* ---------- отзывы: видеоотзыв + цитаты на волосяных линиях ---------- */
+/* ---------- отзывы: рейтинг + две встречные бесконечные ленты ---------- */
 
-.reviews {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
+.rev-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
 }
 
-.reviews__video {
-  margin: 0;
-  max-width: 300px;
+.rev-head .section__title { margin-bottom: 0; }
+
+.rev-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.reviews__video video {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--line);
-  background: var(--navy-950);
+.rev-rating b {
+  font-size: var(--fs-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--amber-ink);
 }
 
-.reviews__video figcaption {
-  margin-top: 8px;
+.rev-stars { display: inline-flex; gap: 3px; }
+
+.rev-stars svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--amber);
+}
+
+.rev-rating a {
   font-size: var(--fs-small);
+  color: var(--ink-2);
+  text-underline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .rev-rating a:hover { color: var(--amber-ink); }
+}
+
+.rev-marquee {
+  margin-top: 28px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.rev-marquee:first-of-type { margin-top: 36px; }
+
+.rev-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 72s linear infinite;
+}
+
+.rev-track--reverse { animation-direction: reverse; }
+
+.rev-group {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+/* читать удобнее, когда лента замирает под курсором */
+@media (hover: hover) and (pointer: fine) {
+  .rev-marquee:hover .rev-track { animation-play-state: paused; }
+}
+:root[data-shot] .rev-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rev-track { animation: none; }
+  .rev-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+.rev-card {
+  flex: none;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: border-color 180ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rev-card:hover { border-color: var(--amber); }
+}
+
+.rev-card__stars {
+  color: var(--amber);
+  font-size: 0.9375rem;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.rev-card p {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rev-card footer {
+  margin-top: auto;
+  font-size: var(--fs-small);
+  font-weight: 500;
   color: var(--ink-2);
 }
 
-.reviews__list { border-top: 1px solid var(--line); }
-
-.reviews__quote {
-  margin: 0;
-  position: relative;
-  padding: 28px 0 28px 48px;
-  border-bottom: 1px solid var(--line);
-}
-
-.reviews__quote::before {
-  content: "\201E"; /* „ */
-  position: absolute;
-  left: 0;
-  top: 14px;
-  font-size: 3rem;
-  line-height: 1;
-  font-weight: 600;
-  color: var(--amber-ink);
-}
-
-.reviews__quote blockquote { margin: 0; }
-
-.reviews__quote blockquote p {
-  font-size: var(--fs-3);
-  line-height: 1.55;
-  color: var(--ink);
-  max-width: 56ch;
-}
-
-.reviews__quote figcaption {
-  margin-top: 12px;
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: var(--amber-ink);
+@media (min-width: 1024px) {
+  .rev-card { width: 380px; }
 }
 
 /* ---------- бесконечная карусель фото в шагах сделки ---------- */
@@ -1496,10 +1566,6 @@ section[id] { scroll-margin-top: 86px; }
   }
   .cities__cta a { margin-top: 0; }
 
-  .reviews {
-    grid-template-columns: 260px 1fr;
-    align-items: start;
-  }
 
   .cities { grid-template-columns: repeat(3, 1fr); }
 
@@ -1578,10 +1644,6 @@ section[id] { scroll-margin-top: 86px; }
     align-items: center;
   }
 
-  .reviews {
-    grid-template-columns: 280px 1fr;
-    gap: 72px;
-  }
 
   .steps__media {
     grid-template-columns: 1fr 1fr 2.28fr;
