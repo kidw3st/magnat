@@ -602,60 +602,6 @@ section[id] { scroll-margin-top: 86px; }
   z-index: 1;
 }
 
-/* чертёжный мир тянется через светлые секции ватермаркой */
-@media (min-width: 1024px) {
-  .section:not(.section--dark)::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: url("picsandvideo/district-plan.svg") right -220px top -140px / 1500px auto no-repeat;
-    opacity: 0.09;
-  }
-
-  .section.section--tinted:not(.section--dark)::before {
-    background-position: left -260px bottom -180px;
-    opacity: 0.1;
-  }
-}
-
-:root[data-theme="night"] .section:not(.section--dark)::before { opacity: 0.28; }
-
-/* ---------- магистраль: дорога от hero к билборду ---------- */
-
-main { position: relative; }
-
-.route { display: none; }
-
-@media (min-width: 1300px) {
-  .route {
-    --route-c: rgba(110, 120, 155, 0.55);
-    display: block;
-    position: absolute;
-    top: 40px;
-    bottom: 150px;
-    right: max(28px, calc((100vw - 1200px) / 2 - 48px));
-    width: 22px;
-    z-index: 1;
-    pointer-events: none;
-    background:
-      linear-gradient(var(--route-c), var(--route-c)) left center / 1.5px 100% no-repeat,
-      linear-gradient(var(--route-c), var(--route-c)) right center / 1.5px 100% no-repeat,
-      repeating-linear-gradient(180deg, var(--route-c) 0 14px, transparent 14px 30px) center top / 1.5px 100% no-repeat;
-  }
-
-  /* стрелка: дорога упирается в билборд */
-  .route::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -22px;
-    transform: translateX(-50%);
-    border: 8px solid transparent;
-    border-top: 12px solid rgba(110, 120, 155, 0.75);
-  }
-}
-
 /* ---------- билборд с формой ---------- */
 
 .billboard {
@@ -664,42 +610,90 @@ main { position: relative; }
   align-items: center;
 }
 
+/* щит «светится» дневными цветами в обеих темах, как настоящий рекламный */
 .billboard__panel {
+  --paper: #FAFAF8;
+  --paper-2: #F1EFE9;
+  --surface: #FFFFFF;
+  --surface-hover: #C9C5B8;
+  --line: #E2DFD6;
+  --ink: #1B2130;
+  --ink-2: #575E6E;
+  --amber-ink: #8A5B10;
+  --error: #B4432F;
+  --success: #2E7D4F;
+
   width: 100%;
-  max-width: 780px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 28px 24px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 8px solid var(--navy-line);
+  border-radius: 6px;
+  padding: 28px 24px 32px;
   box-shadow: var(--shadow-2);
-  text-align: left;
+  text-align: center;
 }
 
-.billboard__legs {
+.billboard__brand {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.billboard__title {
+  font-size: var(--fs-2);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.billboard__lead {
+  margin: 10px auto 26px;
+  font-size: var(--fs-3);
+  color: var(--ink-2);
+  max-width: 34em;
+}
+
+/* опора: кронштейн, центральная колонна, земля */
+.billboard__support {
   position: relative;
   width: min(780px, 100%);
-  height: 58px;
+  height: 92px;
   border-bottom: 1px solid var(--navy-line);
 }
 
-.billboard__legs::before,
-.billboard__legs::after {
+.billboard__support::before {
   content: "";
   position: absolute;
   top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 132px;
+  height: 22px;
+  background: var(--navy-line);
+  clip-path: polygon(0 0, 100% 0, 72% 100%, 28% 100%);
+}
+
+.billboard__support::after {
+  content: "";
+  position: absolute;
+  top: 20px;
   bottom: 0;
-  width: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
   background: var(--navy-line);
 }
 
-.billboard__legs::before { left: 22%; }
-.billboard__legs::after { right: 22%; }
-
-/* внутри светлого щита форма живёт в «дневных» цветах */
-.billboard .lead-form--wide { max-width: none; margin: 0; padding: 0; }
+/* форма внутри щита */
+.billboard .lead-form--wide { max-width: none; margin: 0; padding: 0; background: transparent; box-shadow: none; }
+.billboard .lead-form--wide .field { text-align: left; }
 .billboard .lead-form--wide .field label { color: var(--ink-2); }
-.billboard .consent--dark { color: var(--ink-2); }
-.billboard .consent--dark input { accent-color: var(--amber); }
+.billboard .consent--dark { color: var(--ink-2); justify-content: center; }
+.billboard .consent--dark input { accent-color: var(--navy-900); }
 .billboard .field__error { color: var(--error); }
 .billboard .form-status.is-success { color: var(--success); }
 .billboard .form-status.is-error { color: var(--error); }
@@ -1010,10 +1004,7 @@ main { position: relative; }
   to { transform: translateX(-50%); }
 }
 
-/* пауза при наведении и в режиме скриншота */
-@media (hover: hover) and (pointer: fine) {
-  .marquee:hover .marquee__track { animation-play-state: paused; }
-}
+/* пауза только в режиме скриншота */
 :root[data-shot] .marquee__track { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
