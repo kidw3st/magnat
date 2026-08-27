@@ -320,7 +320,13 @@ ul, ol {
   transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
 }
 .city-select:hover { border-color: var(--on-navy-2); }
-.city-select option { color: var(--ink); }
+
+/* выпадающий список всегда тёмный, независимо от темы страницы */
+.city-select { color-scheme: dark; }
+.city-select option {
+  color: var(--on-navy);
+  background-color: var(--navy-900);
+}
 
 /* к якорям не подъезжаем под липкую шапку */
 section[id] { scroll-margin-top: 78px; }
