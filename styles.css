@@ -954,8 +954,10 @@ ul, ol {
   text-underline-offset: 3px;
 }
 
+/* 15 плиток: на 2 колонках CTA встаёт в последнюю ячейку,
+   на 3 — своей строкой во всю ширину, на 4 — замыкает последний ряд */
 .cities__cta {
-  grid-column: 2 / -1;
+  grid-column: auto;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -1153,6 +1155,7 @@ ul, ol {
   .hq__contacts { align-items: flex-end; }
 
   .cities__cta {
+    grid-column: 1 / -1;
     flex-direction: row;
     align-items: baseline;
     gap: 12px;
@@ -1245,6 +1248,7 @@ ul, ol {
   .steps__media-video { grid-column: auto; }
 
   .cities { grid-template-columns: repeat(4, 1fr); }
+  .cities__cta { grid-column: auto; }
 
   .section { padding-block: 96px; }
 
