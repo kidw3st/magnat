@@ -775,24 +775,67 @@ section[id] { scroll-margin-top: 86px; }
   .section--cta::before { background-position: center bottom 36px; }
 }
 
-/* ---------- преимущества: сетка на волосяных линиях ---------- */
+/* ---------- преимущества: цельный реестр 3×2 в рамке ---------- */
 
 .benefits {
   display: grid;
   grid-template-columns: 1fr;
-  border-top: 1px solid var(--line);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .benefits__item {
-  padding: 24px 0;
-  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  padding: 26px 24px 28px;
+  transition: background-color 200ms var(--ease-out);
 }
 
-.icon {
-  width: 32px;
-  height: 32px;
+@media (hover: hover) and (pointer: fine) {
+  .benefits__item:hover { background: rgba(29, 35, 56, 0.035); }
+  :root[data-theme="night"] .benefits__item:hover { background: rgba(38, 46, 74, 0.6); }
+  .benefits__item:hover .b-ico { border-color: var(--amber); }
+}
+
+.b-ico {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   color: var(--amber-ink);
-  margin-bottom: 14px;
+  transition: border-color 200ms var(--ease-out);
+}
+
+.b-ico svg { width: 30px; height: 30px; }
+
+/* иконки «прорисовываются» штрихом при появлении секции */
+.js .b-ico svg :is(path, rect, circle) {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 900ms var(--ease-out);
+  transition-delay: calc(var(--reveal-delay, 0ms) + 150ms);
+}
+
+.js .benefits.is-revealed .b-ico svg :is(path, rect, circle) {
+  stroke-dashoffset: 0;
+}
+
+:root[data-shot] .b-ico svg :is(path, rect, circle),
+.no-anim .b-ico svg :is(path, rect, circle) {
+  stroke-dashoffset: 0 !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .b-ico svg :is(path, rect, circle) {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
 }
 
 .benefits__item h3 {
@@ -1642,10 +1685,7 @@ section[id] { scroll-margin-top: 86px; }
   }
   .facts { border-top: none; }
 
-  .benefits {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 40px;
-  }
+  .benefits { grid-template-columns: 1fr 1fr; }
 
   .objects { grid-template-columns: 1fr 1fr; }
 
