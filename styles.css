@@ -1188,7 +1188,15 @@ ul, ol {
   .header__city { margin-left: 32px; margin-right: auto; }
   .header__phone { margin-left: 0; }
 
-  .hero { padding-block: 88px 96px; }
+  .hero {
+    padding-block: 64px 72px;
+    /* первый экран целиком в тёмной теме: hero добивает высоту окна */
+    min-height: calc(100svh - 65px);
+    display: flex;
+    align-items: center;
+  }
+
+  .hero .container { width: 100%; }
 
   /* одна плотная лента: текст | портрет во всю высоту | форма,
      факты — горизонтальной полосой под всеми колонками */
