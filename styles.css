@@ -263,19 +263,21 @@ ul, ol {
   padding-block: 48px 56px;
 }
 
-/* «проекция» жилого района: чертёжный силуэт панельных домов вдоль низа hero */
+/* «проекция» жилого района: аксонометрическая схема-генплан (улицы, дома, парк) */
 .hero::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 240px;
+  inset: 0;
   pointer-events: none;
-  opacity: 0.45;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 62%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 62%);
-  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 240'%3E%3Cg fill='none' stroke='%234C5680' stroke-width='1.5'%3E%3Cpath d='M10 240V130H150V240'/%3E%3Cpath d='M50 130V240M105 130V240' stroke-dasharray='4 7'/%3E%3Cpath d='M60 130V118H100V130'/%3E%3Cpath d='M170 240V50H240V240'/%3E%3Cpath d='M193 50V240M217 50V240' stroke-dasharray='4 7'/%3E%3Cpath d='M205 50V28'/%3E%3Cpath d='M260 240V160H400V240'/%3E%3Cpath d='M305 160V240M355 160V240' stroke-dasharray='4 7'/%3E%3Cpath d='M420 240V90H500V240'/%3E%3Cpath d='M447 90V240M473 90V240' stroke-dasharray='4 7'/%3E%3Cpath d='M460 90V70'/%3E%3Cpath d='M520 240V120H610V108H690V240'/%3E%3Cpath d='M565 120V240M650 108V240' stroke-dasharray='4 7'/%3E%3Cpath d='M710 240V40H780V240'/%3E%3Cpath d='M733 40V240M757 40V240' stroke-dasharray='4 7'/%3E%3Cpath d='M745 40V18'/%3E%3Cpath d='M800 240V155H950V240'/%3E%3Cpath d='M850 155V240M900 155V240' stroke-dasharray='4 7'/%3E%3Cpath d='M970 240V80H1040V240'/%3E%3Cpath d='M993 80V240M1017 80V240' stroke-dasharray='4 7'/%3E%3Cpath d='M1060 240V135H1230V240'/%3E%3Cpath d='M1117 135V240M1173 135V240' stroke-dasharray='4 7'/%3E%3Cpath d='M1250 240V65H1330V240'/%3E%3Cpath d='M1276 65V240M1304 65V240' stroke-dasharray='4 7'/%3E%3Cpath d='M1290 65V45'/%3E%3Cpath d='M1350 240V150H1440'/%3E%3Cpath d='M1395 150V240' stroke-dasharray='4 7'/%3E%3C/g%3E%3C/svg%3E") bottom left / 1440px 240px repeat-x;
+  display: none;
+  opacity: 0.62;
+  -webkit-mask-image: linear-gradient(100deg, transparent 16%, #000 50%);
+  mask-image: linear-gradient(100deg, transparent 16%, #000 50%);
+  background: url("picsandvideo/district-plan.svg") right -40px bottom -140px / 1460px auto no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .hero::before { display: block; }
 }
 
 .hero .container { position: relative; }
