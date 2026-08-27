@@ -225,6 +225,16 @@
     });
   }
 
+  /* ---------- логотип и ссылки «#top»: всегда наверх, без залипшего хэша ---------- */
+
+  document.querySelectorAll('a[href="#top"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    });
+  });
+
   /* ---------- скроллспай: подсветка активного раздела в шапке ---------- */
 
   var navLinks = document.querySelectorAll('.header__nav a[href^="#"]');

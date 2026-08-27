@@ -233,8 +233,8 @@ ul, ol {
 .header__in {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 64px;
+  gap: 20px;
+  min-height: 72px;
   padding-block: 8px;
 }
 
@@ -266,7 +266,7 @@ ul, ol {
 .header__nav {
   display: none;
   align-items: center;
-  gap: 18px;
+  gap: 26px;
 }
 
 .header__nav a {
@@ -329,7 +329,12 @@ ul, ol {
 }
 
 /* к якорям не подъезжаем под липкую шапку */
-section[id] { scroll-margin-top: 78px; }
+section[id] { scroll-margin-top: 86px; }
+
+/* навигация включается там, где ей просторно */
+@media (min-width: 1160px) {
+  .header__nav { display: flex; }
+}
 
 /* переключатель дневного/ночного режима */
 .theme-toggle {
@@ -1347,11 +1352,7 @@ section[id] { scroll-margin-top: 78px; }
 
 @media (min-width: 1024px) {
 
-  .header__nav {
-    display: flex;
-    margin-left: 28px;
-    margin-right: auto;
-  }
+  .header__nav { margin-left: 40px; margin-right: auto; }
   .header__city { display: inline-flex; }
   .header__cta { display: inline-flex; white-space: nowrap; }
   .header__phone { margin-left: 0; }
@@ -1359,7 +1360,7 @@ section[id] { scroll-margin-top: 78px; }
   .hero {
     padding-block: 64px 72px;
     /* первый экран целиком в тёмной теме: hero добивает высоту окна */
-    min-height: calc(100svh - 65px);
+    min-height: calc(100svh - 73px);
     display: flex;
     align-items: center;
   }
