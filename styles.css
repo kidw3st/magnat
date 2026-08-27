@@ -496,6 +496,21 @@ section[id] { scroll-margin-top: 86px; }
   box-shadow: var(--shadow-2);
 }
 
+/* карточка формы в hero всегда «светится» дневными цветами —
+   в ночной теме иначе сливается с тёмным фоном */
+.lead-form:not(.lead-form--wide) {
+  --paper: #FAFAF8;
+  --paper-2: #F1EFE9;
+  --surface: #FFFFFF;
+  --surface-hover: #C9C5B8;
+  --line: #E2DFD6;
+  --ink: #1B2130;
+  --ink-2: #575E6E;
+  --amber-ink: #8A5B10;
+  --error: #B4432F;
+  --success: #2E7D4F;
+}
+
 .lead-form__title {
   font-size: var(--fs-3);
   font-weight: 600;
@@ -624,13 +639,18 @@ section[id] { scroll-margin-top: 86px; }
   --success: #2E7D4F;
 
   width: 100%;
+  max-width: 1020px;
   background: var(--paper);
   color: var(--ink);
   border: 8px solid var(--navy-line);
   border-radius: 6px;
-  padding: 28px 24px 32px;
+  padding: 32px 32px 44px;
   box-shadow: var(--shadow-2);
   text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .billboard__panel { padding: 36px 56px 52px; }
 }
 
 .billboard__brand {
@@ -640,21 +660,8 @@ section[id] { scroll-margin-top: 86px; }
   text-transform: uppercase;
   color: var(--ink-2);
   padding-bottom: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 30px;
   border-bottom: 1px solid var(--line);
-}
-
-.billboard__title {
-  font-size: var(--fs-2);
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.billboard__lead {
-  margin: 10px auto 26px;
-  font-size: var(--fs-3);
-  color: var(--ink-2);
-  max-width: 34em;
 }
 
 /* опора: кронштейн, центральная колонна, земля */
@@ -688,8 +695,8 @@ section[id] { scroll-margin-top: 86px; }
   background: var(--navy-line);
 }
 
-/* форма внутри щита */
-.billboard .lead-form--wide { max-width: none; margin: 0; padding: 0; background: transparent; box-shadow: none; }
+/* форма внутри щита: компактная, с воздухом вокруг */
+.billboard .lead-form--wide { max-width: 720px; margin: 0 auto; padding: 0; background: transparent; box-shadow: none; }
 .billboard .lead-form--wide .field { text-align: left; }
 .billboard .lead-form--wide .field label { color: var(--ink-2); }
 .billboard .consent--dark { color: var(--ink-2); justify-content: center; }
@@ -723,8 +730,20 @@ section[id] { scroll-margin-top: 86px; }
   margin: -20px auto 32px;
 }
 
-.section--cta { text-align: center; }
+.section--cta { text-align: center; overflow: hidden; }
 .section--cta .section__title { margin-bottom: 16px; }
+
+/* схематичная инфраструктура вокруг билборда */
+.section--cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("picsandvideo/district-plan.svg") center bottom -300px / 1750px auto no-repeat;
+  opacity: 0.42;
+  -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 48%);
+  mask-image: linear-gradient(180deg, transparent 6%, #000 48%);
+}
 
 /* ---------- преимущества: сетка на волосяных линиях ---------- */
 
