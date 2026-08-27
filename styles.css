@@ -986,7 +986,7 @@ section[id] { scroll-margin-top: 86px; }
   font-size: var(--fs-2);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--amber-ink);
+  color: var(--amber);
 }
 
 .rev-stars { display: inline-flex; gap: 3px; }
