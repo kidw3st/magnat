@@ -7,7 +7,7 @@
 
 :root {
   /* цвет */
-  --paper: #FAFAF8;
+  --paper: #FFFFFF;
   --paper-2: #FFFFFF;
   --line: #E2DFD6;
   --ink: #1B2130;
@@ -520,8 +520,8 @@ section[id] { scroll-margin-top: 86px; }
 /* карточка формы в hero всегда «светится» дневными цветами —
    в ночной теме иначе сливается с тёмным фоном */
 .lead-form:not(.lead-form--wide) {
-  --paper: #FAFAF8;
-  --paper-2: #F1EFE9;
+  --paper: #FFFFFF;
+  --paper-2: #FFFFFF;
   --surface: #FFFFFF;
   --surface-hover: #C9C5B8;
   --line: #E2DFD6;
@@ -648,8 +648,8 @@ section[id] { scroll-margin-top: 86px; }
 
 /* щит «светится» дневными цветами в обеих темах, как настоящий рекламный */
 .billboard__panel {
-  --paper: #FAFAF8;
-  --paper-2: #F1EFE9;
+  --paper: #FFFFFF;
+  --paper-2: #FFFFFF;
   --surface: #FFFFFF;
   --surface-hover: #C9C5B8;
   --line: #E2DFD6;
