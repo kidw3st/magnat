@@ -759,35 +759,47 @@ ul, ol {
   color: var(--on-navy-2);
 }
 
-/* ---------- аэросъёмка в географии ---------- */
-
-.cities__aerial {
-  margin: 0 0 32px;
-}
-
-.cities__aerial img {
-  width: 100%;
-  aspect-ratio: 16 / 8;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--navy-line);
-}
-
-.cities__aerial figcaption {
-  margin-top: 8px;
-  font-size: var(--fs-small);
-  color: var(--on-navy-2);
-}
 
 /* ---------- города ---------- */
 
-/* головной офис */
+/* фон секции: аэросъёмка, растворяющаяся в фирменный синий к сетке */
+.section--cities {
+  position: relative;
+  overflow: hidden;
+}
+
+.section--cities::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("picsandvideo/aerial.jpg") center 62% / cover no-repeat;
+}
+
+.section--cities::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 35, 56, 0.5) 0%,
+    rgba(29, 35, 56, 0.74) 36%,
+    rgba(29, 35, 56, 0.96) 60%,
+    #1D2338 76%
+  );
+}
+
+.section--cities .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* головной офис: подсвеченный «ваш город» */
 .hq {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: var(--navy-800);
-  border: 1px solid var(--navy-line);
+  background: rgba(38, 46, 74, 0.92);
+  border: 1px solid var(--amber);
   border-radius: var(--radius-lg);
   padding: 24px;
   margin-bottom: 32px;
@@ -796,7 +808,14 @@ ul, ol {
 .hq__main {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+}
+
+.hq__tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .hq__label {
@@ -807,11 +826,23 @@ ul, ol {
   color: var(--on-navy-2);
 }
 
-.hq__city {
-  font-size: var(--fs-2);
+.hq__badge {
+  font-size: var(--fs-small);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--navy-950);
+  background: var(--amber);
+  border-radius: 4px;
+  padding: 3px 10px;
+}
+
+.hq__city {
+  font-size: var(--fs-1);
+  font-weight: 600;
+  letter-spacing: -0.025em;
   color: var(--on-navy);
+  line-height: 1.1;
 }
 
 .hq__region {

@@ -449,23 +449,23 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </section>
 
   <!-- ============ ГЕОГРАФИЯ ============ -->
-  <section class="section section--dark" aria-label="Города, в которых работает компания">
+  <section class="section section--dark section--cities" aria-label="Города, в которых работает компания">
     <div class="container">
       <h2 class="section__title" data-reveal>13 городов присутствия</h2>
-      <!-- TODO: при желании добавьте <figcaption> с названием города или объекта на аэросъёмке -->
-      <figure class="cities__aerial" data-reveal>
-        <img src="picsandvideo/aerial.jpg" alt="Аэросъёмка городской застройки" loading="lazy" width="1600" height="900">
-      </figure>
 
+      <!-- при клонировании сайта под другой город: поменяйте город в .hq и бейдж «Ваш город» переедет вместе с ним -->
       <div class="hq" data-reveal>
         <div class="hq__main">
-          <span class="hq__label">Головной офис</span>
+          <span class="hq__tags">
+            <span class="hq__label">Головной офис</span>
+            <span class="hq__badge">Ваш город</span>
+          </span>
           <b class="hq__city">Пермь</b>
           <span class="hq__region">Пермский край · ООО «МАГНАТ 59»</span>
         </div>
         <div class="hq__contacts">
           <a class="hq__phone" href="tel:+79194809290">8 (919) 480-92-90</a>
-          <a class="btn btn--ghost btn--small" href="#lead-form" data-pick-city="Пермь">Оценить квартиру в Перми</a>
+          <a class="btn btn--accent btn--small" href="#lead-form" data-pick-city="Пермь">Оценить квартиру в Перми</a>
         </div>
       </div>
 
