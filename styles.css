@@ -814,19 +814,68 @@ section[id] { scroll-margin-top: 86px; }
 }
 
 .situations li {
-  padding: 24px 0;
   border-bottom: 1px solid var(--line);
 }
 
+/* строка-приглашение: пиктограмма в рамке, текст, стрелка к заявке */
+.sit-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 22px;
+  gap: 18px;
+  align-items: center;
+  padding: 20px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sit-ico {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--amber-ink);
+  transition: border-color 180ms var(--ease-out);
+}
+
+.sit-ico svg { width: 26px; height: 26px; }
+
 .situations h3 {
   font-size: var(--fs-3);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  transition: color 180ms var(--ease-out);
 }
 
 .situations p {
   color: var(--ink-2);
   font-size: var(--fs-small);
-  max-width: 46em;
+  max-width: 52em;
+}
+
+.sit-arr {
+  width: 22px;
+  height: 22px;
+  color: var(--line);
+  transition: color 180ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sit-row:hover .sit-ico { border-color: var(--amber); }
+  .sit-row:hover .sit-arr { color: var(--amber); }
+  .sit-row:hover h3 { color: var(--amber-ink); }
+}
+
+.sit-row:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: -2px;
+  border-radius: var(--radius);
+}
+
+@media (min-width: 1024px) {
+  .sit-row { grid-template-columns: 56px 1fr 24px; gap: 24px; }
+  .sit-ico { width: 56px; height: 56px; }
+  .sit-ico svg { width: 30px; height: 30px; }
 }
 
 /* ---------- с какими квартирами ---------- */
