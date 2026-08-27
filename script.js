@@ -237,22 +237,63 @@
 
   /* ---------- скроллспай: подсветка активного раздела в шапке ---------- */
 
+  var navWrap = document.querySelector('.header__nav');
   var navLinks = document.querySelectorAll('.header__nav a[href^="#"]');
+  var navInk = null;
+  var activeLink = null;
+
+  if (navWrap && navLinks.length) {
+    navInk = document.createElement('span');
+    navInk.className = 'nav-ink';
+    navWrap.appendChild(navInk);
+  }
+
+  function setActiveLink(link) {
+    activeLink = link || null;
+    navLinks.forEach(function (b) { b.classList.remove('is-active'); });
+    if (!navInk) return;
+    if (link) {
+      link.classList.add('is-active');
+      navInk.style.width = link.offsetWidth + 'px';
+      navInk.style.transform = 'translateX(' + link.offsetLeft + 'px)';
+      navInk.classList.add('is-on');
+    } else {
+      navInk.classList.remove('is-on');
+    }
+  }
+
+  /* пока плавный скролл по клику едет к цели, скроллспай молчит —
+     иначе подчёркивание скачет по всем промежуточным пунктам */
+  var spyLocked = false;
+  var spyUnlockTimer = null;
+
+  function unlockSpy() {
+    spyLocked = false;
+    if (spyUnlockTimer) { clearTimeout(spyUnlockTimer); spyUnlockTimer = null; }
+  }
+
+  window.addEventListener('scrollend', unlockSpy, { passive: true });
+
   navLinks.forEach(function (a) {
     a.addEventListener('click', function () {
-      navLinks.forEach(function (b) { b.classList.remove('is-active'); });
-      a.classList.add('is-active');
+      setActiveLink(a);
+      spyLocked = true;
+      if (spyUnlockTimer) clearTimeout(spyUnlockTimer);
+      spyUnlockTimer = setTimeout(unlockSpy, 1500); // страховка для браузеров без scrollend
     });
   });
+
+  window.addEventListener('resize', function () {
+    if (activeLink) setActiveLink(activeLink);
+  });
+
   if (navLinks.length && 'IntersectionObserver' in window) {
     var linkById = {};
     navLinks.forEach(function (a) { linkById[a.getAttribute('href').slice(1)] = a; });
     var spy = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(function (a) { a.classList.remove('is-active'); });
-        var link = linkById[entry.target.id];
-        if (link) link.classList.add('is-active');
+        if (!entry.isIntersecting || spyLocked) return;
+        setActiveLink(linkById[entry.target.id] || null);
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     Object.keys(linkById).forEach(function (id) {

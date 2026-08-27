@@ -267,6 +267,7 @@ ul, ol {
   display: none;
   align-items: center;
   gap: 26px;
+  position: relative;
 }
 
 .header__nav a {
@@ -276,17 +277,37 @@ ul, ol {
   color: var(--on-navy-2);
   text-decoration: none;
   padding: 4px 0;
-  border-bottom: 2px solid transparent;
-  transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
+  transition: color 180ms var(--ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .header__nav a:hover { color: var(--on-navy); }
 }
 
-.header__nav a.is-active {
-  color: var(--on-navy);
-  border-bottom-color: var(--amber);
+.header__nav a.is-active { color: var(--on-navy); }
+
+/* единое скользящее подчёркивание активного раздела */
+.nav-ink {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 24px;
+  background: var(--amber);
+  border-radius: 1px;
+  opacity: 0;
+  transform: translateX(0);
+  transition:
+    transform 300ms var(--ease-out),
+    width 300ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+  pointer-events: none;
+}
+
+.nav-ink.is-on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-ink { transition: opacity 200ms ease; }
 }
 
 /* выбор города: собранный контрол с пином */
