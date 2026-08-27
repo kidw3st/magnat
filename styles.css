@@ -878,6 +878,38 @@ section[id] { scroll-margin-top: 86px; }
   .sit-ico svg { width: 30px; height: 30px; }
 }
 
+/* тёмная версия секции ситуаций: контрастная жемчужина между светлыми блоками */
+.section--sit { overflow: hidden; }
+
+.section--sit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("picsandvideo/district-plan.svg") right -420px top -60px / 1500px auto no-repeat;
+  opacity: 0.3;
+  -webkit-mask-image: linear-gradient(100deg, transparent 30%, #000 72%);
+  mask-image: linear-gradient(100deg, transparent 30%, #000 72%);
+}
+
+.section--sit .situations { border-top-color: var(--navy-line); }
+.section--sit .situations li { border-bottom-color: var(--navy-line); }
+.section--sit .situations h3 { color: var(--on-navy); }
+.section--sit .situations p { color: var(--on-navy-2); }
+
+.section--sit .sit-ico {
+  border-color: var(--navy-line);
+  color: var(--amber);
+}
+
+.section--sit .sit-arr { color: var(--navy-line); }
+
+@media (hover: hover) and (pointer: fine) {
+  .section--sit .sit-row:hover .sit-ico { border-color: var(--amber); }
+  .section--sit .sit-row:hover h3 { color: var(--amber); }
+  .section--sit .sit-row:hover .sit-arr { color: var(--amber); }
+}
+
 /* ---------- с какими квартирами ---------- */
 
 .objects {
@@ -1035,7 +1067,7 @@ section[id] { scroll-margin-top: 86px; }
   font-size: var(--fs-2);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--amber);
+  color: var(--ink);
 }
 
 .rev-stars { display: inline-flex; gap: 3px; }
