@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=14">
 
   <!-- Слот для кода аналитики: вставьте счётчик сюда -->
 
@@ -102,8 +102,16 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </span>
     </a>
 
+    <nav class="header__nav" aria-label="Разделы страницы">
+      <a href="#benefits">Почему мы</a>
+      <a href="#steps">Сделка</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#cities">Города</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+
     <div class="header__city">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-5.1-7-11a7 7 0 1 1 14 0c0 5.9-7 11-7 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.5"/></svg>
+      <svg class="header__city-pin" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-5.1-7-11a7 7 0 1 1 14 0c0 5.9-7 11-7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.8"/></svg>
       <label class="visually-hidden" for="city-select">Ваш город</label>
       <select id="city-select" class="city-select">
         <option value="">Выберите город</option>
@@ -202,7 +210,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </section>
 
   <!-- ============ ПРЕИМУЩЕСТВА ============ -->
-  <section class="section" aria-label="Преимущества срочного выкупа в компании МАГНАТ">
+  <section class="section" id="benefits" aria-label="Преимущества срочного выкупа в компании МАГНАТ">
     <div class="container">
       <h2 class="section__title" data-reveal>Почему нам продают квартиры</h2>
       <ul class="benefits" data-reveal-group>
@@ -330,7 +338,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </section>
 
   <!-- ============ 4 ШАГА ============ -->
-  <section class="section section--dark" aria-label="Этапы сделки срочного выкупа">
+  <section class="section section--dark" id="steps" aria-label="Этапы сделки срочного выкупа">
     <div class="container">
       <h2 class="section__title" data-reveal>Как проходит сделка</h2>
       <ol class="steps" data-reveal-group>
@@ -414,7 +422,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </section>
 
   <!-- ============ ОТЗЫВЫ ============ -->
-  <section class="section section--tinted" aria-label="Отзывы клиентов">
+  <section class="section section--tinted" id="reviews" aria-label="Отзывы клиентов">
     <div class="container">
       <h2 class="section__title" data-reveal>Отзывы наших клиентов</h2>
       <div class="reviews" data-reveal-group>
@@ -451,7 +459,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </section>
 
   <!-- ============ ГЕОГРАФИЯ ============ -->
-  <section class="section section--dark section--cities" aria-label="Города, в которых работает компания">
+  <section class="section section--dark section--cities" id="cities" aria-label="Города, в которых работает компания">
     <div class="container">
       <h2 class="section__title" data-reveal>16 городов присутствия</h2>
 
@@ -498,7 +506,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="section" aria-label="Ответы на частые вопросы">
+  <section class="section" id="faq" aria-label="Ответы на частые вопросы">
     <div class="container container--narrow">
       <h2 class="section__title" data-reveal>Частые вопросы</h2>
       <div class="faq" data-reveal>
@@ -609,6 +617,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a class="btn btn--accent" href="#lead-form">Оценить квартиру</a>
 </nav>
 
-<script src="script.js?v=13" defer></script>
+<script src="script.js?v=14" defer></script>
 </body>
 </html>

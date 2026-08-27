@@ -213,29 +213,68 @@ ul, ol {
   color: var(--on-navy-2);
 }
 
-.header__city {
+/* навигация по блокам */
+.header__nav {
   display: none;
   align-items: center;
-  gap: 6px;
+  gap: 18px;
+}
+
+.header__nav a {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  white-space: nowrap;
   color: var(--on-navy-2);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header__nav a:hover { color: var(--on-navy); }
+}
+
+.header__nav a.is-active {
+  color: var(--on-navy);
+  border-bottom-color: var(--amber);
+}
+
+/* выбор города: собранный контрол с пином */
+.header__city {
+  display: none;
+  position: relative;
+  align-items: center;
+}
+
+.header__city-pin {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--amber);
+  pointer-events: none;
 }
 
 .city-select {
   appearance: none;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--navy-line);
+  background-color: var(--navy-800);
+  border: 1px solid var(--navy-line);
+  border-radius: var(--radius);
   color: var(--on-navy);
-  font: 400 var(--fs-small)/1.4 var(--font);
-  padding: 4px 18px 4px 2px;
+  font: 500 var(--fs-small)/1.4 var(--font);
+  padding: 8px 30px 8px 32px;
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='m1 1 4 4 4-4' fill='none' stroke='%23A9B0C6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 2px center;
-  transition: border-color 180ms var(--ease-out);
+  background-position: right 11px center;
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
 }
 .city-select:hover { border-color: var(--on-navy-2); }
 .city-select option { color: var(--ink); }
+
+/* к якорям не подъезжаем под липкую шапку */
+section[id] { scroll-margin-top: 78px; }
 
 .header__phone {
   display: inline-flex;
@@ -1182,11 +1221,19 @@ ul, ol {
 
 @media (min-width: 1024px) {
 
+  .header__nav {
+    display: flex;
+    margin-left: 28px;
+    margin-right: auto;
+  }
   .header__city { display: inline-flex; }
-  .header__cta { display: inline-flex; }
-  .header__phone { margin-left: auto; }
-  .header__city { margin-left: 32px; margin-right: auto; }
+  .header__cta { display: inline-flex; white-space: nowrap; }
   .header__phone { margin-left: 0; }
+
+  /* на средних десктопах телефон сжимается до иконки, чтобы всё влезло */
+  @media (max-width: 1339.98px) {
+    .header__phone span { display: none; }
+  }
 
   .hero {
     padding-block: 64px 72px;

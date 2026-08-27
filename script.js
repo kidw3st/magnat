@@ -189,6 +189,32 @@
     });
   });
 
+  /* ---------- скроллспай: подсветка активного раздела в шапке ---------- */
+
+  var navLinks = document.querySelectorAll('.header__nav a[href^="#"]');
+  navLinks.forEach(function (a) {
+    a.addEventListener('click', function () {
+      navLinks.forEach(function (b) { b.classList.remove('is-active'); });
+      a.classList.add('is-active');
+    });
+  });
+  if (navLinks.length && 'IntersectionObserver' in window) {
+    var linkById = {};
+    navLinks.forEach(function (a) { linkById[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.remove('is-active'); });
+        var link = linkById[entry.target.id];
+        if (link) link.classList.add('is-active');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(linkById).forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (sec) spy.observe(sec);
+    });
+  }
+
   /* ---------- появление секций: opacity + translateY(16px), 400ms ---------- */
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
