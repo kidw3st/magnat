@@ -1358,14 +1358,8 @@ section[id] { scroll-margin-top: 86px; }
 /* пауза только в режиме скриншота */
 :root[data-shot] .marquee__track { animation-play-state: paused; }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee__track { animation: none; }
-  .marquee {
-    overflow-x: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
+/* лента едет всегда, в том числе при системном «уменьшении анимации»:
+   прямое требование владельца сайта */
 
 /* заглушка под фото */
 .media-slot {
