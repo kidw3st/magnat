@@ -407,6 +407,38 @@
     });
   }
 
+  /* ---------- лайтбокс: карточка карусели в полный размер ---------- */
+
+  var lightbox = document.querySelector('[data-lightbox]');
+  if (lightbox) {
+    var lbImg = lightbox.querySelector('.lightbox__img');
+
+    var openLightbox = function (img) {
+      lbImg.src = img.src.replace('.webp', '-full.webp');
+      lbImg.alt = img.alt;
+      lightbox.hidden = false;
+      document.body.classList.add('lightbox-open');
+    };
+
+    var closeLightbox = function () {
+      lightbox.hidden = true;
+      lbImg.removeAttribute('src');
+      document.body.classList.remove('lightbox-open');
+    };
+
+    document.querySelectorAll('.marquee').forEach(function (m) {
+      m.addEventListener('click', function (e) {
+        var img = e.target.closest('.marquee__img');
+        if (img) openLightbox(img);
+      });
+    });
+
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+    });
+  }
+
   /* ---------- бесшовный цикл лент отзывов: дублируем группу ---------- */
 
   document.querySelectorAll('.rev-track').forEach(function (track) {

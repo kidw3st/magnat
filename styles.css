@@ -1382,7 +1382,7 @@ section[id] { scroll-margin-top: 86px; }
   font-size: var(--fs-small);
 }
 
-/* реальные фото, когда приедут */
+/* карточки ленты: клик открывает полный размер */
 .marquee__img {
   flex: none;
   width: 224px;
@@ -1390,7 +1390,53 @@ section[id] { scroll-margin-top: 86px; }
   object-fit: cover;
   border-radius: var(--radius-lg);
   border: 1px solid var(--navy-line);
+  cursor: zoom-in;
 }
+
+/* ---------- лайтбокс ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(20, 25, 41, 0.92);
+  cursor: zoom-out;
+}
+
+.lightbox__img {
+  max-width: min(92vw, 660px);
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--navy-800);
+  border: 1px solid var(--navy-line);
+  border-radius: var(--radius);
+  color: var(--on-navy);
+  cursor: pointer;
+  transition: border-color 180ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lightbox__close:hover { border-color: var(--on-navy-2); }
+}
+
+/* пока лайтбокс открыт: страница не крутится, лента стоит */
+body.lightbox-open { overflow: hidden; }
+body.lightbox-open .marquee__track { animation-play-state: paused; }
 
 @media (min-width: 1024px) {
   .media-slot, .marquee__img { width: 264px; }

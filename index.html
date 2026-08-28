@@ -28,7 +28,7 @@
   <link rel="preload" href="fonts/golos-lat.woff2" as="font" type="font/woff2" crossorigin>
   <!-- фон hero — LCP-элемент на десктопе: сообщаем о нём браузеру заранее -->
   <link rel="preload" href="picsandvideo/district-plan.svg" as="image" media="(min-width: 1024px)">
-  <link rel="stylesheet" href="styles.css?v=40">
+  <link rel="stylesheet" href="styles.css?v=41">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -478,7 +478,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <img class="marquee__img" src="picsandvideo/social-7.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Вторичка: прогноз по вторичному рынку">
             <img class="marquee__img" src="picsandvideo/social-8.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Окна возможностей на 2026 год">
           </div>
-          </div>
           <div class="marquee__group" aria-hidden="true">
             <img class="marquee__img" src="picsandvideo/social-1.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Рынок недвижимости 2026: что будет с ценами, ипотекой и спросом">
             <img class="marquee__img" src="picsandvideo/social-2.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Главная мысль 2026: год перекройки рынка">
@@ -488,7 +487,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <img class="marquee__img" src="picsandvideo/social-6.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Новостройки: главный драйвер цен">
             <img class="marquee__img" src="picsandvideo/social-7.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Вторичка: прогноз по вторичному рынку">
             <img class="marquee__img" src="picsandvideo/social-8.webp" width="560" height="700" loading="lazy" alt="Карточка из соцсетей МАГНАТ. Окна возможностей на 2026 год">
-          </div>
           </div>
         </div>
       </div>
@@ -768,6 +766,14 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
+<!-- Лайтбокс: карточка карусели в полный размер, закрытие кликом или Esc -->
+<div class="lightbox" data-lightbox hidden>
+  <img class="lightbox__img" src="" alt="">
+  <button type="button" class="lightbox__close" aria-label="Закрыть просмотр">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
 <!-- Мобильная нижняя панель -->
 <nav class="mobilebar" aria-label="Быстрые действия">
   <a class="btn btn--ghost" href="tel:+79194809290">
@@ -777,6 +783,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a class="btn btn--accent" href="#lead-form">Оценить квартиру</a>
 </nav>
 
-<script src="script.js?v=40" defer></script>
+<script src="script.js?v=41" defer></script>
 </body>
 </html>
