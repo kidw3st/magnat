@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css?v=33">
+  <link rel="stylesheet" href="styles.css?v=34">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -614,9 +614,18 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   <!-- ============ FAQ ============ -->
   <section class="section" id="faq" aria-label="Ответы на частые вопросы">
-    <div class="container container--narrow">
-      <h2 class="section__title" data-reveal>Частые вопросы</h2>
-      <div class="faq" data-reveal>
+    <div class="container">
+      <div class="faq-grid">
+        <div class="faq-side" data-reveal>
+          <h2 class="section__title">Частые вопросы</h2>
+          <p class="faq-side__lead">Собрали ответы на то, о чём собственники спрашивают чаще всего.</p>
+          <div class="faq-side__cta">
+            <span>Не нашли свой вопрос?</span>
+            <a class="faq-side__phone" href="tel:+79194809290">8 (919) 480-92-90</a>
+            <a class="btn btn--accent btn--small" href="#lead-form">Оценить квартиру</a>
+          </div>
+        </div>
+        <div class="faq" data-reveal>
         <details>
           <summary>Почему цена выкупа ниже рыночной?</summary>
           <p>Мы платим собственные деньги сразу и берём на себя все риски дальнейшей продажи: ожидание покупателя, торг, юридическую проверку, ремонт. Скидка оплачивает скорость и гарантию расчёта. Обычная продажа занимает месяцы, выкуп занимает 1–2 дня.</p>
@@ -645,6 +654,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <summary>Купите ли квартиру с неузаконенной перепланировкой?</summary>
           <p>Да, покупаем как есть. Узаконивание перепланировки после сделки решаем сами, на цену это влияет умеренно.</p>
         </details>
+        </div>
       </div>
     </div>
   </section>

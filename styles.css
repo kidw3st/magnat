@@ -1501,26 +1501,79 @@ section[id] { scroll-margin-top: 86px; }
 
 /* ---------- FAQ ---------- */
 
-.faq { border-top: 1px solid var(--line); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
 
-.faq details { border-bottom: 1px solid var(--line); }
+.faq-side .section__title { margin-bottom: 12px; }
+
+.faq-side__lead {
+  color: var(--ink-2);
+  max-width: 26em;
+}
+
+.faq-side__cta {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.faq-side__cta > span {
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+
+.faq-side__phone {
+  font-size: var(--fs-3);
+  font-weight: 600;
+  color: var(--amber-ink);
+  text-decoration: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .faq-side__phone:hover { color: var(--amber); }
+}
+
+/* аккордеоны в единой рамке-реестре */
+.faq {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.faq details:not(:last-child) { border-bottom: 1px solid var(--line); }
 
 .faq summary {
   list-style: none;
   cursor: pointer;
-  padding: 20px 40px 20px 0;
+  padding: 20px 56px 20px 22px;
   font-size: var(--fs-3);
   font-weight: 500;
   position: relative;
-  transition: color 180ms var(--ease-out);
+  transition: color 180ms var(--ease-out), background-color 180ms var(--ease-out);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .faq summary:hover { background: rgba(29, 35, 56, 0.035); }
+  :root[data-theme="night"] .faq summary:hover { background: rgba(38, 46, 74, 0.6); }
+}
+
+.faq details[open] summary { color: var(--amber-ink); }
 
 .faq summary::-webkit-details-marker { display: none; }
 
 .faq summary::after {
   content: "";
   position: absolute;
-  right: 4px;
+  right: 24px;
   top: 50%;
   width: 10px;
   height: 10px;
@@ -1534,14 +1587,36 @@ section[id] { scroll-margin-top: 86px; }
   transform: translateY(-30%) rotate(225deg);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .faq summary:hover { color: var(--amber-ink); }
-}
-
 .faq details p {
-  padding: 0 0 20px;
+  padding: 2px 22px 22px;
   color: var(--ink-2);
   max-width: 62ch;
+}
+
+/* мягкое появление ответа */
+.faq details[open] > p {
+  animation: faq-open 260ms var(--ease-out);
+}
+
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq details[open] > p { animation: none; }
+}
+
+@media (min-width: 1024px) {
+  .faq-grid {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 72px;
+    align-items: start;
+  }
+
+  .faq-side {
+    position: sticky;
+    top: 104px;
+  }
 }
 
 /* ---------- футер ---------- */
