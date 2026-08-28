@@ -4,4 +4,4 @@ Clean-param: city&theme&shot /
 User-agent: *
 Allow: /
 
-Sitemap: https://kidw3st.github.io/magnat/sitemap.xml
+Sitemap: https://xn--59-6kcao6cj5b.xn--p1ai/sitemap.xml
