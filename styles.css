@@ -1382,7 +1382,8 @@ section[id] { scroll-margin-top: 86px; }
   font-size: var(--fs-small);
 }
 
-/* карточки ленты: клик открывает полный размер */
+/* карточки ленты: клик открывает полный размер;
+   подложка на время загрузки — вместо пустой рамки едет плашка в цвет темы */
 .marquee__img {
   flex: none;
   width: 224px;
@@ -1390,6 +1391,7 @@ section[id] { scroll-margin-top: 86px; }
   object-fit: cover;
   border-radius: var(--radius-lg);
   border: 1px solid var(--navy-line);
+  background: var(--navy-800);
   cursor: zoom-in;
 }
 
