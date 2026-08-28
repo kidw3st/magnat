@@ -971,7 +971,7 @@ section[id] { scroll-margin-top: 86px; }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .objects li:hover { border-color: var(--navy-800); }
+  .objects li:hover { border-color: var(--amber); }
 }
 
 .objects h3 {
@@ -1040,54 +1040,73 @@ section[id] { scroll-margin-top: 86px; }
 
 .explain__text p strong { color: var(--ink); font-weight: 600; }
 
-.compare {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.compare__col {
+/* сравнительная таблица: обычная продажа против выкупа */
+.cmp-wrap {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  overflow: hidden;
   background: var(--surface);
 }
 
-.compare__col--accent {
+.cmp {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.cmp th,
+.cmp td {
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--line);
+}
+
+.cmp thead th { border-top: none; }
+
+.cmp thead th {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.cmp tbody th {
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+  width: 86px;
+  padding-top: 17px;
+}
+
+.cmp td { color: var(--ink-2); }
+
+/* колонка выкупа — фирменный графит с янтарными метками */
+.cmp .cmp__buy {
   background: var(--navy-900);
   color: var(--on-navy);
-  border-color: var(--navy-900);
+  border-top-color: var(--navy-line);
 }
 
-.compare h3 {
-  font-size: var(--fs-0);
-  font-weight: 600;
-  margin-bottom: 14px;
-}
+.cmp thead .cmp__buy { color: var(--on-navy); }
 
-.compare ul { display: grid; gap: 8px; }
-
-.compare li {
+.cmp td.cmp__buy {
   position: relative;
-  padding-left: 18px;
-  font-size: var(--fs-small);
-  color: var(--ink-2);
+  padding-left: 30px;
 }
 
-.compare__col--accent li { color: var(--on-navy-2); }
-
-.compare li::before {
+.cmp td.cmp__buy::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.55em;
+  left: 14px;
+  top: 1.35em;
   width: 8px;
   height: 1.5px;
-  background: currentColor;
-  opacity: 0.6;
+  background: var(--amber);
 }
-
-.compare__col--accent li::before { background: var(--amber); opacity: 1; }
 
 /* ---------- отзывы: рейтинг + две встречные бесконечные ленты ---------- */
 

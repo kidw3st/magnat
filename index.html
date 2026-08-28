@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="styles.css?v=31">
+  <link rel="stylesheet" href="styles.css?v=32">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -477,25 +477,38 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <p>Если время терпит и вы готовы ждать покупателя, честно скажем: продавайте на открытом рынке, так выгоднее. Выкуп нужен, когда решение нужно быстро.</p>
         </div>
         <div class="explain__compare" data-reveal>
-          <div class="compare">
-            <div class="compare__col">
-              <h3>Обычная продажа</h3>
-              <ul>
-                <li>2–6 месяцев ожидания</li>
-                <li>Показы, торг, снижение цены</li>
-                <li>Риск срыва сделки покупателем</li>
-                <li>Расходы на риелтора и юриста</li>
-              </ul>
-            </div>
-            <div class="compare__col compare__col--accent">
-              <h3>Срочный выкуп</h3>
-              <ul>
-                <li>1–2 дня до денег</li>
-                <li>Цена зафиксирована в договоре</li>
-                <li>Гарантия расчёта в день сделки</li>
-                <li>Все расходы за счёт компании</li>
-              </ul>
-            </div>
+          <div class="cmp-wrap">
+            <table class="cmp">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Критерий</span></th>
+                  <th scope="col">Обычная продажа</th>
+                  <th scope="col" class="cmp__buy">Срочный выкуп</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Срок</th>
+                  <td>2–6 месяцев ожидания</td>
+                  <td class="cmp__buy">1–2 дня до денег</td>
+                </tr>
+                <tr>
+                  <th scope="row">Цена</th>
+                  <td>Показы, торг, снижение</td>
+                  <td class="cmp__buy">Зафиксирована в договоре</td>
+                </tr>
+                <tr>
+                  <th scope="row">Гарантии</th>
+                  <td>Сделка может сорваться</td>
+                  <td class="cmp__buy">Расчёт в день сделки</td>
+                </tr>
+                <tr>
+                  <th scope="row">Расходы</th>
+                  <td>Риелтор и юрист за ваш счёт</td>
+                  <td class="cmp__buy">Всё оплачивает компания</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
