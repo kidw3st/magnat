@@ -459,6 +459,29 @@ section[id] { scroll-margin-top: 86px; }
   color: var(--on-navy-2);
 }
 
+/* город посетителя подсвечивается в заголовке */
+.h1-city { color: var(--amber); }
+
+/* плашка для города, которого нет в списке */
+.hero__citycall {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--navy-line);
+  border-radius: var(--radius);
+  font-size: var(--fs-small);
+  color: var(--on-navy-2);
+  max-width: 34em;
+}
+
+.hero__citycall b { color: var(--on-navy); }
+
+.hero__citycall a {
+  color: var(--amber);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 /* карточка основателя: портрет + именная плашка одной конструкцией */
 .hero__owner {
   margin: 0;

@@ -147,16 +147,51 @@
     });
   });
 
+  /* ---------- персонализация по городу ---------- */
+
+  /* предложный падеж для заголовка и title */
+  var CITY_IN = {
+    'Пермь': 'в Перми',
+    'Москва': 'в Москве',
+    'Санкт-Петербург': 'в Санкт-Петербурге',
+    'Новосибирск': 'в Новосибирске',
+    'Екатеринбург': 'в Екатеринбурге',
+    'Казань': 'в Казани',
+    'Красноярск': 'в Красноярске',
+    'Нижний Новгород': 'в Нижнем Новгороде',
+    'Челябинск': 'в Челябинске',
+    'Уфа': 'в Уфе',
+    'Краснодар': 'в Краснодаре',
+    'Самара': 'в Самаре',
+    'Омск': 'в Омске',
+    'Тюмень': 'в Тюмени',
+    'Ижевск': 'в Ижевске',
+    'Воронеж': 'в Воронеже'
+  };
+
+  function personalizeHeading(city) {
+    var inCase = CITY_IN[city];
+    if (!inCase) return;
+    document.querySelectorAll('[data-city-in]').forEach(function (el) {
+      el.textContent = ' ' + inCase;
+    });
+    document.title = 'Срочный выкуп квартир ' + inCase + ' до 80% от рыночной стоимости | МАГНАТ';
+    var call = document.querySelector('.hero__citycall');
+    if (call) call.hidden = true;
+  }
+
   /* ---------- выбор города в сетке: подставляем в заявку ---------- */
 
   function applyCity(city) {
-    if (citySelect) citySelect.value = city;
+    if (citySelect && CITY_IN[city]) citySelect.value = city;
     document.querySelectorAll('input[name="address"]').forEach(function (input) {
       if (!input.value.trim() || input.dataset.autofilled === '1') {
         input.value = city + ', ';
         input.dataset.autofilled = '1';
       }
     });
+    personalizeHeading(city);
+    try { localStorage.setItem('magnat-city', city); } catch (e) {}
   }
 
   var cityPicks = document.querySelectorAll('.cities__pick');
@@ -188,6 +223,42 @@
       applyCity(link.dataset.pickCity);
     });
   });
+
+  /* ---------- город при заходе: из ссылки (?city=…) или из прошлого визита ---------- */
+
+  (function initCity() {
+    var raw = '';
+    try {
+      raw = new URLSearchParams(location.search).get('city') || localStorage.getItem('magnat-city') || '';
+    } catch (e) {}
+    raw = String(raw).trim().slice(0, 40);
+    if (!raw || !/^[А-Яа-яЁё][А-Яа-яЁё\s-]*$/.test(raw)) return;
+
+    /* известный город — сверяем без учёта регистра */
+    var known = Object.keys(CITY_IN).filter(function (c) {
+      return c.toLowerCase() === raw.toLowerCase();
+    })[0];
+
+    if (known) {
+      applyCity(known);
+      syncCityTiles(known);
+      return;
+    }
+
+    /* города нет в списке: плашка «позвоните» + всё равно подставим в заявку */
+    var pretty = raw.charAt(0).toUpperCase() + raw.slice(1);
+    var call = document.querySelector('.hero__citycall');
+    if (call) {
+      call.querySelector('b').textContent = pretty;
+      call.hidden = false;
+    }
+    document.querySelectorAll('input[name="address"]').forEach(function (input) {
+      if (!input.value.trim()) {
+        input.value = pretty + ', ';
+        input.dataset.autofilled = '1';
+      }
+    });
+  })();
 
   /* ---------- дневной / ночной режим ---------- */
 
