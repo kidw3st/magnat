@@ -494,8 +494,12 @@ section[id] { scroll-margin-top: 86px; }
   color: var(--on-navy-2);
 }
 
-/* город посетителя подсвечивается в заголовке */
-.h1-city { color: var(--amber); }
+/* город посетителя подсвечивается в заголовке;
+   вставка не рвётся ни по пробелу после «в», ни по дефису Санкт-Петербурга */
+.h1-city {
+  color: var(--amber);
+  white-space: nowrap;
+}
 
 /* плашка для города, которого нет в списке */
 .hero__citycall {
@@ -1913,6 +1917,10 @@ section[id] { scroll-margin-top: 86px; }
 
   /* в узкой колонке трёхколонной ленты заголовок мельче, переносы ровнее */
   .hero h1 { font-size: 2.625rem; }
+
+  /* длинный город («в Санкт-Петербурге», «в Нижнем Новгороде») занимает свою
+     строку целиком: кегль чуть меньше, точный размер страхует fitHeroCity() */
+  .hero h1.h1--longcity { font-size: 2.5rem; }
   .hero__owner { grid-column: 2; grid-row: 1; }
   .hero__form { grid-column: 3; grid-row: 1; align-self: start; }
   .hero__in .facts { grid-column: 1 / -1; grid-row: 2; }

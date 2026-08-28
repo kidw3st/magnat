@@ -169,12 +169,43 @@
     'Воронеж': 'в Воронеже'
   };
 
+  /* длинные города («в Санкт-Петербурге») не влезают в строку на полном кегле:
+     ужимаем H1 ровно настолько, чтобы вставка помещалась в колонку */
+  function fitHeroCity() {
+    var h1 = document.querySelector('.hero h1');
+    var span = h1 && h1.querySelector('[data-city-in]');
+    if (!h1 || !span) return;
+    h1.style.fontSize = '';
+    if (!span.textContent) return;
+    var copy = h1.closest('.hero__copy');
+    if (!copy) return;
+    var copyW = copy.clientWidth;
+    var spanW = span.getBoundingClientRect().width;
+    if (!copyW || !spanW || spanW <= copyW * 0.98) return;
+    var base = parseFloat(getComputedStyle(h1).fontSize);
+    var next = Math.max(24, Math.floor(base * (copyW * 0.97) / spanW));
+    h1.style.fontSize = next + 'px';
+  }
+
+  var fitTick = false;
+  window.addEventListener('resize', function () {
+    if (!fitTick) {
+      fitTick = true;
+      requestAnimationFrame(function () { fitHeroCity(); fitTick = false; });
+    }
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeroCity);
+
   function personalizeHeading(city) {
     var inCase = CITY_IN[city];
     if (!inCase) return;
     document.querySelectorAll('[data-city-in]').forEach(function (el) {
-      el.textContent = ' ' + inCase;
+      el.textContent = inCase;
     });
+    /* базовое ужатие — классом, не дожидаясь загрузки шрифта */
+    var h1 = document.querySelector('.hero h1');
+    if (h1) h1.classList.toggle('h1--longcity', inCase.length >= 15);
+    fitHeroCity();
     document.title = 'Срочный выкуп квартир ' + inCase + ' до 80% от рыночной стоимости | МАГНАТ';
     var call = document.querySelector('.hero__citycall');
     if (call) call.hidden = true;

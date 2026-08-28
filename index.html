@@ -28,7 +28,7 @@
   <link rel="preload" href="fonts/golos-lat.woff2" as="font" type="font/woff2" crossorigin>
   <!-- фон hero — LCP-элемент на десктопе: сообщаем о нём браузеру заранее -->
   <link rel="preload" href="picsandvideo/district-plan.svg" as="image" media="(min-width: 1024px)">
-  <link rel="stylesheet" href="styles.css?v=37">
+  <link rel="stylesheet" href="styles.css?v=39">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -177,7 +177,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <section class="hero" aria-label="Предложение о срочном выкупе квартиры">
     <div class="container hero__in">
       <div class="hero__copy">
-        <h1>Выкупим вашу квартиру<span class="h1-city" data-city-in></span> до&nbsp;80% от&nbsp;рыночной стоимости</h1>
+        <!-- пробел перед span обязателен: точка переноса перед вставкой города
+             (внутри span пробелов нет — он неразрывный); при пустом span
+             двойной пробел схлопывается сам -->
+        <h1>Выкупим вашу квартиру <span class="h1-city" data-city-in></span> до&nbsp;80% от&nbsp;рыночной стоимости</h1>
         <p class="hero__sub">Деньги в&nbsp;день обращения. Официальное оформление через МФЦ и&nbsp;Росреестр. Все расходы по&nbsp;сделке берём на&nbsp;себя.</p>
         <p class="hero__req">Работаем официально: ООО&nbsp;«МАГНАТ&nbsp;59», ИНН&nbsp;5902062050</p>
         <p class="hero__citycall" hidden>Города <b></b> пока нет в&nbsp;нашем списке. Позвоните — обсудим, сможем ли выкупить вашу квартиру: <a href="tel:+79194809290">8&nbsp;(919)&nbsp;480-92-90</a></p>
@@ -763,6 +766,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a class="btn btn--accent" href="#lead-form">Оценить квартиру</a>
 </nav>
 
-<script src="script.js?v=37" defer></script>
+<script src="script.js?v=39" defer></script>
 </body>
 </html>
