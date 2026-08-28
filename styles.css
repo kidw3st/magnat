@@ -459,12 +459,15 @@ section[id] { scroll-margin-top: 86px; }
   color: var(--on-navy-2);
 }
 
-/* владелец компании: поясной портрет */
+/* карточка основателя: портрет + именная плашка одной конструкцией */
 .hero__owner {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  border: 1px solid var(--navy-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--navy-800);
 }
 
 .hero__owner img {
@@ -472,31 +475,46 @@ section[id] { scroll-margin-top: 86px; }
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: center 30%;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--navy-line);
+  display: block;
 }
 
 .hero__owner figcaption {
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--navy-line);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__owner b {
+  font-weight: 600;
+  color: var(--on-navy);
+}
+
+.hero__owner figcaption span {
   font-size: var(--fs-small);
-  font-weight: 500;
   color: var(--on-navy-2);
 }
 
-/* факты-цифры */
+/* факты-цифры: три в ряд с вертикальными делениями на любой ширине */
 .facts {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   margin: 8px 0 0;
   border-top: 1px solid var(--navy-line);
 }
 
 .facts__item {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--navy-line);
+  padding: 14px 12px 0 0;
+}
+
+.facts__item + .facts__item {
+  border-left: 1px solid var(--navy-line);
+  padding-left: 14px;
 }
 
 .facts dt {
-  font-size: var(--fs-2);
+  font-size: 1.375rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--amber);
@@ -506,6 +524,12 @@ section[id] { scroll-margin-top: 86px; }
   margin: 4px 0 0;
   font-size: var(--fs-small);
   color: var(--on-navy-2);
+}
+
+@media (min-width: 640px) {
+  .facts__item { padding: 20px 20px 0 0; }
+  .facts__item + .facts__item { padding-left: 20px; }
+  .facts dt { font-size: var(--fs-2); }
 }
 
 /* ---------- форма ---------- */
@@ -1772,14 +1796,6 @@ section[id] { scroll-margin-top: 86px; }
 @media (min-width: 640px) {
 
   .container { padding-inline: 32px; }
-
-  .facts { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .facts__item {
-    border-bottom: none;
-    border-top: 1px solid var(--navy-line);
-    padding: 20px 0 0;
-  }
-  .facts { border-top: none; }
 
   .benefits { grid-template-columns: 1fr 1fr; }
 
