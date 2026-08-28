@@ -1084,18 +1084,19 @@ section[id] { scroll-margin-top: 86px; }
 
 .cmp td { color: var(--ink-2); }
 
-/* колонка выкупа — фирменный графит с янтарными метками */
-.cmp .cmp__buy {
-  background: var(--navy-900);
-  color: var(--on-navy);
-  border-top-color: var(--navy-line);
-}
+/* вертикальные волосяные разделители между колонками */
+.cmp th + th,
+.cmp th + td,
+.cmp td + td { border-left: 1px solid var(--line); }
 
-.cmp thead .cmp__buy { color: var(--on-navy); }
+/* колонка выкупа: одним цветом со всеми, иерархия — типографикой */
+.cmp thead th.cmp__buy { color: var(--amber-ink); }
 
 .cmp td.cmp__buy {
   position: relative;
   padding-left: 30px;
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .cmp td.cmp__buy::before {
