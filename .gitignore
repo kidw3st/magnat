@@ -7,3 +7,13 @@ picsandvideo/*.cdr
 
 # видео тяжелее лимита GitHub (872 МБ) — используйте сжатую версию
 picsandvideo/DJI_20250503195150_0021_D.MP4
+
+# исходники от заказчика: лежат локально, на сайте не используются
+picsandvideo/DJI_*.MP4
+picsandvideo/IMG_*.MOV
+picsandvideo/photo_*.jpg
+picsandvideo/deal-*.jpg
+picsandvideo/poster-*.jpg
+picsandvideo/лого магнат.jpg
+picsandvideo/aerial.jpg
+picsandvideo/owner-portrait.jpg

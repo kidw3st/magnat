@@ -1,0 +1,7 @@
+User-agent: Yandex
+Clean-param: city&theme&shot /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://kidw3st.github.io/magnat/sitemap.xml
