@@ -1406,6 +1406,9 @@ section[id] { scroll-margin-top: 86px; }
   cursor: zoom-out;
 }
 
+/* display:grid выше перебил бы атрибут hidden — возвращаем ему силу */
+.lightbox[hidden] { display: none; }
+
 .lightbox__img {
   max-width: min(92vw, 660px);
   max-height: 88vh;
