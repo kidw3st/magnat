@@ -5,22 +5,18 @@
   document.documentElement.classList.add('js');
 
   /* ============================================================
-     Отправка заявки.
-     TODO: подставьте ваш endpoint (CRM, телеграм-бот, почтовый шлюз).
-     Функция должна вернуть Promise; reject или ok:false = ошибка.
+     Отправка заявки: приёмник на сервере магнат59.рф шлёт её
+     в телеграм менеджерам. Абсолютный адрес, чтобы работало
+     и с зеркала на GitHub Pages.
      ============================================================ */
   async function sendLead(data) {
-    // TODO: заменить на реальную отправку, например:
-    // const res = await fetch('https://example.com/api/lead', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data)
-    // });
-    // if (!res.ok) throw new Error('HTTP ' + res.status);
-    // return res.json();
-
-    await new Promise(function (r) { setTimeout(r, 800); }); // имитация сети
-    return { ok: true };
+    var res = await fetch('https://xn--59-6kcao6cj5b.xn--p1ai/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
   }
 
   /* ---------- маска телефона +7 (___) ___-__-__ ---------- */
@@ -124,11 +120,13 @@
       status.classList.remove('is-error', 'is-success');
 
       try {
+        var honeypot = form.querySelector('input[name="website"]');
         var result = await sendLead({
           phone: phone.value,
           address: address.value.trim(),
           city: citySelect ? citySelect.value : '',
-          page: location.href
+          page: location.href,
+          website: honeypot ? honeypot.value : ''
         });
         if (!result || result.ok === false) throw new Error('send failed');
 

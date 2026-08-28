@@ -28,7 +28,7 @@
   <link rel="preload" href="fonts/golos-lat.woff2" as="font" type="font/woff2" crossorigin>
   <!-- фон hero — LCP-элемент на десктопе: сообщаем о нём браузеру заранее -->
   <link rel="preload" href="picsandvideo/district-plan.svg" as="image" media="(min-width: 1024px)">
-  <link rel="stylesheet" href="styles.css?v=39">
+  <link rel="stylesheet" href="styles.css?v=40">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -212,6 +212,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             </datalist>
             <p class="field__error" data-error-for="lf-address" role="alert" hidden>Укажите город или адрес</p>
           </div>
+
+          <!-- ловушка для спам-ботов: люди поле не видят и не заполняют -->
+          <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <label class="consent">
             <input type="checkbox" name="consent" required>
@@ -706,6 +709,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <span class="btn__loading" aria-hidden="true">Отправляем…</span>
           </button>
         </div>
+        <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label class="consent consent--dark">
           <input type="checkbox" name="consent" required>
           <span>Соглашаюсь на <a href="privacy">обработку персональных данных</a></span>
@@ -766,6 +770,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a class="btn btn--accent" href="#lead-form">Оценить квартиру</a>
 </nav>
 
-<script src="script.js?v=39" defer></script>
+<script src="script.js?v=40" defer></script>
 </body>
 </html>

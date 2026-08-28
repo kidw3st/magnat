@@ -671,6 +671,16 @@ section[id] { scroll-margin-top: 86px; }
 .section--dark .field__error,
 .lead-form--wide .field__error { color: #F2A08F; }
 
+/* поле-ловушка для ботов: физически вне экрана, для людей не существует */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .consent {
   display: flex;
   align-items: flex-start;
