@@ -135,6 +135,7 @@
       input.addEventListener('input', function () {
         input.classList.remove('is-invalid');
         setError(form, input.id, false);
+        delete input.dataset.autofilled;
       });
     });
     if (consent) {
@@ -268,7 +269,7 @@
     if (citySelect && CITY_IN[city]) citySelect.value = city;
     document.querySelectorAll('input[name="address"]').forEach(function (input) {
       if (!input.value.trim() || input.dataset.autofilled === '1') {
-        input.value = city + ', ';
+        input.value = city;
         input.dataset.autofilled = '1';
       }
     });
@@ -341,7 +342,7 @@
     }
     document.querySelectorAll('input[name="address"]').forEach(function (input) {
       if (!input.value.trim()) {
-        input.value = pretty + ', ';
+        input.value = pretty;
         input.dataset.autofilled = '1';
       }
     });

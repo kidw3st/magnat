@@ -28,7 +28,7 @@
   <link rel="preload" href="fonts/golos-lat.woff2" as="font" type="font/woff2" crossorigin>
   <!-- фон hero — LCP-элемент на десктопе: сообщаем о нём браузеру заранее -->
   <link rel="preload" href="picsandvideo/district-plan.svg" as="image" media="(min-width: 1024px)">
-  <link rel="stylesheet" href="styles.css?v=47">
+  <link rel="stylesheet" href="styles.css?v=48">
 
   <!-- Тема применяется до отрисовки, чтобы не мигало при загрузке -->
   <script>
@@ -199,9 +199,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           </div>
 
           <div class="field">
-            <label for="lf-address">Город или адрес квартиры</label>
-            <input id="lf-address" name="address" type="text" autocomplete="address-line1"
-                   placeholder="Пермь, ул. Ленина, 50" list="cities-list" required>
+            <label for="lf-address">Город</label>
+            <input id="lf-address" name="address" type="text" autocomplete="address-level2"
+                   placeholder="Пермь" list="cities-list" maxlength="60" required>
             <datalist id="cities-list">
               <option value="Пермь"></option><option value="Москва"></option><option value="Санкт-Петербург"></option>
               <option value="Новосибирск"></option><option value="Екатеринбург"></option><option value="Казань"></option>
@@ -210,7 +210,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
               <option value="Омск"></option><option value="Тюмень"></option><option value="Ижевск"></option>
               <option value="Воронеж"></option>
             </datalist>
-            <p class="field__error" data-error-for="lf-address" role="alert" hidden>Укажите город или адрес</p>
+            <p class="field__error" data-error-for="lf-address" role="alert" hidden>Укажите город</p>
           </div>
 
           <!-- ловушка для спам-ботов: люди поле не видят и не заполняют -->
@@ -707,10 +707,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
             <p class="field__error" data-error-for="lf2-phone" role="alert" hidden>Введите номер телефона полностью</p>
           </div>
           <div class="field">
-            <label for="lf2-address">Город или адрес квартиры</label>
-            <input id="lf2-address" name="address" type="text" autocomplete="address-line1"
-                   placeholder="Екатеринбург, ул. Мира, 12" list="cities-list" required>
-            <p class="field__error" data-error-for="lf2-address" role="alert" hidden>Укажите город или адрес</p>
+            <label for="lf2-address">Город</label>
+            <input id="lf2-address" name="address" type="text" autocomplete="address-level2"
+                   placeholder="Екатеринбург" list="cities-list" maxlength="60" required>
+            <p class="field__error" data-error-for="lf2-address" role="alert" hidden>Укажите город</p>
           </div>
           <button class="btn btn--accent" type="submit" data-submit>
             <span class="btn__label">Получить оценку</span>
@@ -787,6 +787,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <a class="btn btn--accent" href="#lead-form">Оценить квартиру</a>
 </nav>
 
-<script src="script.js?v=47" defer></script>
+<script src="script.js?v=48" defer></script>
 </body>
 </html>
