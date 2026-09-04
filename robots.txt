@@ -1,3 +1,9 @@
+# Как можно использовать содержимое сайта (contentsignals.org)
+# ai-train=no   — не обучать на нём модели
+# search=yes    — индексировать для поиска
+# ai-input=yes  — можно использовать как источник в ответах ассистентов
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
 User-agent: Yandex
 Clean-param: city&theme&shot /
 
@@ -5,4 +11,5 @@ User-agent: *
 Allow: /
 Disallow: /crm
 
+Llms: https://xn--59-6kcao6cj5b.xn--p1ai/llms.txt
 Sitemap: https://xn--59-6kcao6cj5b.xn--p1ai/sitemap.xml
