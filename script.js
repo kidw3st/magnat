@@ -10,13 +10,22 @@
      и с зеркала на GitHub Pages.
      ============================================================ */
   async function sendLead(data) {
-    var res = await fetch('https://xn--59-6kcao6cj5b.xn--p1ai/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return res.json();
+    /* без таймаута браузер ждёт отказа сети до 40 секунд — человек
+       всё это время видит «Отправляем…» и уходит, так и не позвонив */
+    var control = new AbortController();
+    var timer = setTimeout(function () { control.abort(); }, 10000);
+    try {
+      var res = await fetch('https://xn--59-6kcao6cj5b.xn--p1ai/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        signal: control.signal
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   /* ---------- маска телефона +7 (___) ___-__-__ ---------- */
@@ -407,23 +416,66 @@
     });
   }
 
+  /* ---------- карточки карусели: грузим заранее, но не в первую волну ----------
+     нативный lazy здесь не работает: лента едет, и карточка въезжает в кадр
+     раньше, чем браузер решит её подгрузить — в ленте появляются пустые рамки.
+     Поэтому грузим всю ленту разом, когда до неё остаётся около экрана прокрутки:
+     первый экран не тормозится, а к моменту показа картинки уже на месте */
+
+  (function preloadMarquee() {
+    var marquees = document.querySelectorAll('.marquee');
+    if (!marquees.length) return;
+
+    function load(marquee) {
+      marquee.querySelectorAll('img[data-src]').forEach(function (img) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      });
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      marquees.forEach(load);
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        load(entry.target);
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '1200px 0px' });
+
+    marquees.forEach(function (m) { io.observe(m); });
+  })();
+
   /* ---------- лайтбокс: карточка карусели в полный размер ---------- */
 
   var lightbox = document.querySelector('[data-lightbox]');
   if (lightbox) {
     var lbImg = lightbox.querySelector('.lightbox__img');
+    var lbClose = lightbox.querySelector('.lightbox__close');
+    var BLANK_PIXEL = lbImg.getAttribute('src');
+    var lastFocused = null;
 
     var openLightbox = function (img) {
-      lbImg.src = img.src.replace('.webp', '-full.webp');
+      /* полный размер прописан в data-full: подмена расширения в имени
+         молча ломалась бы на любой картинке без парного файла */
+      lbImg.src = img.dataset.full || img.src;
       lbImg.alt = img.alt;
+      lastFocused = document.activeElement;
       lightbox.hidden = false;
       document.body.classList.add('lightbox-open');
+      lbClose.focus();
     };
 
     var closeLightbox = function () {
+      if (lightbox.hidden) return;
       lightbox.hidden = true;
-      lbImg.removeAttribute('src');
+      lbImg.src = BLANK_PIXEL;
       document.body.classList.remove('lightbox-open');
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+      lastFocused = null;
     };
 
     document.querySelectorAll('.marquee').forEach(function (m) {
@@ -431,11 +483,23 @@
         var img = e.target.closest('.marquee__img');
         if (img) openLightbox(img);
       });
+      /* карточки открываются и с клавиатуры: Enter или пробел */
+      m.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+        var img = e.target.closest('.marquee__img[role="button"]');
+        if (!img) return;
+        e.preventDefault();
+        openLightbox(img);
+      });
     });
 
     lightbox.addEventListener('click', closeLightbox);
+
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      /* пока окно открыто, фокус не убегает на страницу под ним */
+      if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); }
     });
   }
 

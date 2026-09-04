@@ -1026,10 +1026,17 @@ section[id] { scroll-margin-top: 86px; }
   position: absolute;
   inset: 0;
   pointer-events: none;
+  display: none;
   background: url("picsandvideo/district-plan.svg") right -420px top -60px / 1500px auto no-repeat;
   opacity: 0.3;
   -webkit-mask-image: linear-gradient(100deg, transparent 30%, #000 72%);
   mask-image: linear-gradient(100deg, transparent 30%, #000 72%);
+}
+
+/* на телефоне чертёж уезжает почти целиком за край, но тянет 70 КБ:
+   включаем его только там, где он действительно виден */
+@media (min-width: 640px) {
+  .section--sit::before { display: block; }
 }
 
 .section--sit .situations { border-top-color: var(--navy-line); }
@@ -1205,6 +1212,63 @@ section[id] { scroll-margin-top: 86px; }
   background: var(--amber);
 }
 
+/* на узких экранах колонки сплющиваются («2–6 месяцев ожидания» в три строки):
+   разворачиваем строки таблицы в карточки, подписи колонок берём из data-col */
+@media (max-width: 639.98px) {
+  .cmp thead { display: none; }
+
+  .cmp,
+  .cmp tbody,
+  .cmp tr,
+  .cmp tbody th,
+  .cmp td { display: block; }
+
+  .cmp tr { padding: 16px; }
+  .cmp tr + tr { border-top: 1px solid var(--line); }
+
+  .cmp tbody th {
+    width: auto;
+    padding: 0 0 10px;
+    border: none;
+  }
+
+  .cmp td,
+  .cmp td + td,
+  .cmp th + td {
+    border: none;
+    border-left: 2px solid var(--line);
+    padding: 6px 0 6px 12px;
+  }
+
+  .cmp td + td { margin-top: 10px; }
+
+  .cmp td.cmp__buy {
+    border-left-color: var(--amber);
+    padding-left: 12px;
+  }
+
+  /* янтарный штрих заменяем подписью колонки;
+     .cmp td.cmp__buy::before перечисляем явно — базовое правило штриха
+     специфичнее, чем .cmp td::before, и иначе перебивает подпись */
+  .cmp td::before,
+  .cmp td.cmp__buy::before {
+    content: attr(data-col);
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-bottom: 1px;
+    background: none;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+  }
+
+  .cmp td.cmp__buy::before { color: var(--amber-ink); }
+}
+
 /* ---------- отзывы: рейтинг + две встречные бесконечные ленты ---------- */
 
 .rev-head {
@@ -1276,14 +1340,8 @@ section[id] { scroll-margin-top: 86px; }
 }
 :root[data-shot] .rev-track { animation-play-state: paused; }
 
-@media (prefers-reduced-motion: reduce) {
-  .rev-track { animation: none; }
-  .rev-marquee {
-    overflow-x: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
+/* лента отзывов, как и фото-карусель, едет всегда — включая режим
+   «уменьшение анимации»: иначе на телефоне она превращается в ручную прокрутку */
 
 .rev-card {
   flex: none;
@@ -1387,6 +1445,11 @@ section[id] { scroll-margin-top: 86px; }
   border: 1px solid var(--navy-line);
   background: var(--navy-800);
   cursor: zoom-in;
+}
+
+.marquee__img:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
 }
 
 /* ---------- лайтбокс ---------- */
