@@ -37,24 +37,68 @@
     return d.slice(0, 11);
   }
 
+  /* Разделители ставим только МЕЖДУ цифрами и никогда в конце.
+     Иначе стереть номер невозможно: удаляешь «)», маска тут же
+     дорисовывает её обратно, и Backspace перестаёт работать. */
   function formatPhone(digits) {
     if (!digits) return '';
     var rest = digits.slice(1);
-    var out = '+7';
-    if (rest.length) out += ' (' + rest.slice(0, 3);
-    if (rest.length >= 3) out += ')';
-    if (rest.length > 3) out += ' ' + rest.slice(3, 6);
+    if (!rest.length) return '+7 ';
+    var out = '+7 (' + rest.slice(0, 3);
+    if (rest.length > 3) out += ') ' + rest.slice(3, 6);
     if (rest.length > 6) out += '-' + rest.slice(6, 8);
     if (rest.length > 8) out += '-' + rest.slice(8, 10);
     return out;
   }
 
+  function isDigit(ch) {
+    return ch >= '0' && ch <= '9';
+  }
+
+  /* сколько цифр номера (без кода страны) стоит левее курсора */
+  function restBefore(value, pos) {
+    var head = value.slice(0, pos).replace(/\D/g, '');
+    if (head.charAt(0) === '8' || head.charAt(0) === '7') head = head.slice(1);
+    return head.length;
+  }
+
+  /* позиция курсора сразу за n-й цифрой номера */
+  function caretAfter(formatted, n) {
+    if (n > 0) {
+      var seen = 0;
+      for (var i = 2; i < formatted.length; i++) {
+        if (isDigit(formatted.charAt(i))) {
+          seen++;
+          if (seen === n) return i + 1;
+        }
+      }
+    }
+    return formatted.length;
+  }
+
   document.querySelectorAll('[data-phone]').forEach(function (input) {
-    input.addEventListener('input', function () {
-      input.value = formatPhone(digitsOf(input.value));
+    input.addEventListener('input', function (e) {
+      var digits = digitsOf(input.value);
+      /* дожали Backspace до пустого номера — убираем и «+7 »,
+         иначе префикс дорисовывается обратно и поле выглядит зависшим */
+      if (digits.length <= 1 && e && typeof e.inputType === 'string' &&
+          e.inputType.indexOf('delete') === 0) {
+        input.value = '';
+        return;
+      }
+      /* курсор держим на месте: без этого он улетает в конец
+         и править номер в середине невозможно */
+      var typed = restBefore(input.value, input.selectionStart);
+      var formatted = formatPhone(digits);
+      input.value = formatted;
+      var pos = caretAfter(formatted, typed);
+      try { input.setSelectionRange(pos, pos); } catch (e) {}
     });
     input.addEventListener('focus', function () {
-      if (!input.value) input.value = '+7 (';
+      if (!input.value) {
+        input.value = '+7 ';
+        try { input.setSelectionRange(3, 3); } catch (e) {}
+      }
     });
     input.addEventListener('blur', function () {
       if (digitsOf(input.value).length <= 1) input.value = '';
