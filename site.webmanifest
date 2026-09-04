@@ -1,0 +1,29 @@
+{
+  "name": "МАГНАТ — срочный выкуп квартир",
+  "short_name": "МАГНАТ",
+  "description": "Выкуп квартиры за 1–2 дня до 80% от рыночной стоимости. Оформление через МФЦ и Росреестр.",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1D2338",
+  "theme_color": "#1D2338",
+  "icons": [
+    {
+      "src": "/picsandvideo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/picsandvideo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/picsandvideo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

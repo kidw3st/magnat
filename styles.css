@@ -2154,3 +2154,24 @@ body.lightbox-open .marquee__track { animation-play-state: paused; }
   body { padding-bottom: 0; }
   .footer { padding-bottom: 112px; }
 }
+
+/* Цели нажатия пальцем.
+   На телефоне иконка звонка в шапке — 17×17: палец в неё не попадает.
+   Расширяем только для касания: с мышью 36 px хватает, и десктопную
+   вёрстку менять незачем. Порог 44 px — граница, ниже которой
+   промахи резко учащаются. */
+@media (pointer: coarse) {
+  .theme-toggle { width: 44px; height: 44px; }
+
+  .header__phone {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .btn--small { min-height: 44px; }
+
+  /* подпись согласия кликается целиком, но по самому квадратику
+     тоже целятся — делаем его крупнее */
+  .consent input { width: 20px; height: 20px; margin-top: 1px; }
+}

@@ -1,0 +1,8 @@
+# Куда сообщать о найденной уязвимости сайта магнат59.рф.
+# Формат описан в RFC 9116.
+
+Contact: mailto:atv-559@mail.ru
+Contact: tel:+79194809290
+Expires: 2027-09-01T00:00:00.000Z
+Preferred-Languages: ru, en
+Canonical: https://xn--59-6kcao6cj5b.xn--p1ai/.well-known/security.txt
