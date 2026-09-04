@@ -1447,6 +1447,27 @@ section[id] { scroll-margin-top: 86px; }
   cursor: zoom-in;
 }
 
+/* Карусель без скриптов: те же карточки, но статичной сеткой.
+   Разметка лежит в <noscript>, поэтому при работающем JS не грузится. */
+.marquee-fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+  padding: 0;
+  list-style: none;
+}
+
+.marquee-fallback img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--navy-line);
+  background: var(--navy-800);
+}
+
 .marquee__img:focus-visible {
   outline: 2px solid var(--amber);
   outline-offset: 3px;
