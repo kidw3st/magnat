@@ -3,5 +3,6 @@ Clean-param: city&theme&shot /
 
 User-agent: *
 Allow: /
+Disallow: /crm
 
 Sitemap: https://xn--59-6kcao6cj5b.xn--p1ai/sitemap.xml
